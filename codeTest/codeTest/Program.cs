@@ -13,7 +13,11 @@ namespace codeTest
 
 			Console.WriteLine("HelloWorld!");
 			//http://inobae.blog.me/90007564511
-			
+
+            String chosung = "ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ";
+            Console.WriteLine(chosung.IndexOf("ㄴ"));
+			ushort uni = 0xAC00;
+            Console.WriteLine(Convert.ToChar(uni));
 
 		}
 	}
