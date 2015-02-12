@@ -18,6 +18,11 @@ namespace codeTest
 {
 	class Program
 	{
+		static String initial = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+		static String medial = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+		static String final = " ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+		static ushort korBase = 0xAC00;
+
 		static void Main(string[] args)
 		{
 			//---------------------------------------------
@@ -30,9 +35,7 @@ namespace codeTest
 			//ex) 녕 = 0xAC00 + (2 * 21 + 6) * 28 + 21
 			//---------------------------------------------
 
-			String initial = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
-			String medial = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
-			String final = " ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+
 			Console.WriteLine(initial.IndexOf("ㄴ"));
 			Console.WriteLine(medial.IndexOf("ㅕ"));
 			Console.WriteLine(final.IndexOf("ㅇ"));
@@ -74,6 +77,7 @@ namespace codeTest
 
 			Program pg = new Program();
 			Console.WriteLine("test parse : " + pg.DevideChar('ㄱ'));
+			Console.WriteLine(pg.MergeJaso(" ", "ㅏ", ""));
 
 			//---------------------------------------------
 			//입력 경우의 수
@@ -120,6 +124,23 @@ namespace codeTest
 
 			String result = initial + " " + medial + " " + final;
 			return result;
+		}
+
+		public string MergeJaso(string choSung, string jungSung, string jongSung)
+		{
+			int initialPos, medialPos, finalPos;
+			int nUniCode;
+
+			initialPos = initial.IndexOf(choSung);     // 초성 위치
+			Console.WriteLine("init : " + initialPos);
+			medialPos = medial.IndexOf(jungSung);   // 중성 위치
+			finalPos = final.IndexOf(jongSung);   // 종성 위치
+
+			// 앞서 만들어 낸 계산식
+			nUniCode = korBase + (initialPos * 21 + medialPos) * 28 + finalPos;
+			// 코드값을 문자로 변환
+			char temp = Convert.ToChar(nUniCode);
+			return temp.ToString();
 		}
 	}
 
