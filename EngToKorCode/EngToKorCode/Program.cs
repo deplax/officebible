@@ -200,11 +200,13 @@ namespace EngToKorCode
 			return medial.Contains(str);
 		}
 
-		public void writeKor(ref int[] phoneme, char[] charArr)
+		public void writeKor(ref int[] phoneme, ref char[] charArr)
 		{
+			int comb = 0;
+
 			for (int i = 0; i < phoneme.Length; i++)
 			{
-				int startFlag = -1;
+				int startIdx = -1;
 				string str = "";
 				switch(phoneme[i]){
 					case 0:
@@ -212,27 +214,47 @@ namespace EngToKorCode
 						break;
 					case 1:
 						if (i < phoneme.Length && phoneme[i + 1] == 2)
-							startFlag = i;
+							startIdx = i;
 						else
 							call();
 						break;
 					case 2:
+						if (startIdx != -1)
+							if (i < phoneme.Length && phoneme[i + 1] == 3)
+								continue;
+							else
+								makeChar();
+						else
+							call();
 						break;
 					case 3:
+						if (startIdx != -1)
+							makeChar();
+						else
+							call();
 						break;
-					case 4:	
-						break;
+					case 4:
+						continue;
 					case 5:
-						break;
-
-
+						continue;
 				}
 			}
 		}
 
-		public void call()
+		public void call(ref)
 		{
+		
+		}
 
+		public void makeChar(ref int startIdx, ref int idx, ref char[] charArr, int comb)
+		{
+			if(comb == 0){
+				charArr[idx],
+			}else if(comb == 1){
+
+			}else if(comb == 2){
+
+			}
 		}
 
 		//완성된 한글 텍스트를 돌려준다.
@@ -256,9 +278,9 @@ namespace EngToKorCode
 				//없을 경우
 					//변환출력
 			//4일 경우
-				//중성 결합
+				//패스
 			//5일 경우
-				//종성 결합
+				//패스
 
 
 		//Int32 getCode(string type, string val)
