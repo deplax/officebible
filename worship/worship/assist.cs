@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace EngToKor
+namespace Assist
 {
 
 	enum Syllabic : byte { none, consonant, vowel };
@@ -34,9 +34,6 @@ namespace EngToKor
 		public static String[] oldBibleShortcutList = Box.oldBibleShortcutString.Split(' ');
 		public static String[] newBibleShortcutList = Box.newBibleShortcutString.Split(' ');
 
-		public static string DBroot = @"D:\성경송출\BibleDB";
-		public static string ListRoot = @"D:\성경송출";
-
 		public static ArrayList BibleList()
 		{
 			ArrayList bibleList = new ArrayList();
@@ -59,35 +56,25 @@ namespace EngToKor
 	{
 		static void Main(string[] args)
 		{
-			//string testString = "장세기";
+			string testString = "장세기";
+			Console.WriteLine("입력값 : " + testString);
 
-			//EngToKor etk = new EngToKor();
-			//Console.WriteLine("입력값 : " + testString);			
-			//Console.WriteLine("영문 한글 변환 : " + etk.Trans(testString));
-			//testString = etk.Trans(testString);
-			//KorToPhoneme ktp = new KorToPhoneme();
-			//string KeyPhoneme = ktp.Trans(testString);
-			//Console.WriteLine("한글 자소 분리 : " + KeyPhoneme);
-			
+			EngToKor etk = new EngToKor();
+			Console.WriteLine("영문 한글 변환 : " + etk.Trans(testString));
 
-			//AutoComplete bac = new AutoComplete();
-			//Console.WriteLine("suggest : " + bac.BibleSuggestProcess(KeyPhoneme));
-			//Console.WriteLine("normal : " + bac.NormalProcess(bac.BibleSuggestProcess(KeyPhoneme)));
-			//Console.WriteLine();
-
-
-			AutoComplete ac = new AutoComplete();
+			testString = etk.Trans(testString);
 			KorToPhoneme ktp = new KorToPhoneme();
-			string KeyPhoneme = ktp.Trans("저노은");
-			string[] temp = ac.WorshipSuggestProcess(KeyPhoneme);
-			//foreach (string str in temp)
-			//	Console.WriteLine(str);
-			
-			
+			string KeyPhoneme = ktp.Trans(testString);
+			Console.WriteLine("한글 자소 분리 : " + KeyPhoneme);
+
+			BibleAutoComplete bac = new BibleAutoComplete();
+			Console.WriteLine("suggest : " + bac.SuggestProcess(KeyPhoneme));
+			Console.WriteLine("normal : " + bac.NormalProcess(bac.SuggestProcess(KeyPhoneme)));
+			Console.WriteLine();
 		}
 	}
 
-	class AutoComplete
+	class BibleAutoComplete
 	{
 
 		// 한글을 넣으면 가장 확률이 높은 요소를 반환
@@ -112,7 +99,7 @@ namespace EngToKor
 		}
 
 		// 한글 변환 파싱 된 스트링을 넣으면 가장 확률이 놓은 요소를 반환
-		public string BibleSuggestProcess(string keyword)
+		public string SuggestProcess(string keyword)
 		{
 			//성경 전용이 아니도록 고쳐야함.
 			int topIndex = 0;
@@ -120,7 +107,7 @@ namespace EngToKor
 			KorToPhoneme ktp = new KorToPhoneme();
 			for (var i = 0; i < Box.BibleList().Count; i++)
 			{
-				
+
 				int bibleLen = ktp.Trans(Box.BibleList()[i].ToString()).Length;
 
 				// Boundary 를 위해 커팅할 길이 체크
@@ -154,77 +141,6 @@ namespace EngToKor
 				}
 			}
 			return Box.BibleList()[topIndex].ToString();
-		}
-
-		public string[] WorshipSuggestProcess(string keyword)
-		{
-			string[] worshopArr = GetFileList(@"찬양집");
-			//foreach (string str in worshopArr)
-			//	Console.WriteLine(str);
-
-
-			//성경 전용이 아니도록 고쳐야함.
-			int topIndex = 0;
-			int topValue = 0;
-			KorToPhoneme ktp = new KorToPhoneme();
-
-			int[] rank = new int[worshopArr.Length];
-			for (var i = 0; i < worshopArr.Length; i++)
-			{
-				// Boundary 를 위해 커팅할 길이 체크
-				int cutLen;
-				if (worshopArr[i].Length < keyword.Length)
-					cutLen = worshopArr[i].Length;
-				else
-					cutLen = keyword.Length;
-				string tempStr = ktp.Trans(worshopArr[i]).Substring(0, cutLen);
-				char[] tempCh = tempStr.ToCharArray();
-
-				ArrayList tempStrArrList = new ArrayList();
-				tempStrArrList.AddRange(tempCh);
-
-				int tempMatch = 0;
-
-				for (var j = 0; j < cutLen; j++)
-				{
-					if (tempStrArrList.Contains(keyword[j]))
-					{
-						rank[i]++;
-						tempStrArrList.Remove(keyword[j]);
-					}
-				}
-
-			
-
-				// 일치율이 최대인 값을 저장.
-				
-			}
-			
-			string[] tt = new string[rank.Length];
-			for(var i = 0; i < tt.Length; i++)
-				tt[i] = worshopArr[rank[i]];
-
-			return tt;
-			//return worshopArr[topIndex];
-		}
-
-		public string[] GetFileList(string str)
-		{
-			string filePath = Box.ListRoot + @"\\" + str;
-			string[] filePaths = Directory.GetFiles(filePath);
-			for (int i = 0; i < filePaths.Length; i++)
-			{
-				string[] temp = filePaths[i].Split('\\');
-				filePaths[i] = temp.Last();
-				filePaths[i] = filePaths[i].Replace(" ", "");
-			}
-			return filePaths;
-		}
-
-		public void Ranking(int[] cnt, int top){
-			for (int i = 0; i < cnt.Length - 1; i++)
-				cnt[i + 1] = cnt[i];
-			cnt[0] = top;
 		}
 	}
 

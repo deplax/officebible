@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+    <ribbon>
+        <tabs>
+            <tab idMso="TabAddIns" label="Worship">
+                <group id="group1" label="Bible">
+                    <box id="box1" boxStyle="vertical">
+                        <editBox id="editBox1" sizeString="WWWWWWW" onChange="editBox1_TextChanged" supertip="성경을 입력해 주세요" label="Bible" showImage="false" />
+                        <editBox id="editBox2" sizeString="www" label="chapter" showImage="false" />
+                        <box id="box2">
+                            <editBox id="editBox3" sizeString="WW" label="Verse" showImage="false" />
+                            <editBox id="editBox4" sizeString="WW" label=" " showImage="false" />
+                        </box>
+                    </box>
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>
