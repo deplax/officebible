@@ -4,18 +4,18 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace FileOpen
+using System.IO;
+namespace FileControl
 {
 	class Box
 	{
 		public static string DBroot = @"D:\성경송출\BibleDB";
 	}
-	class Program
+	class FileControl
 	{
 		static void Main(string[] args)
 		{
-			Program pg = new Program();
+			FileControl pg = new FileControl();
 			pg.GetBibleVerse("개역개정", "요", 3, 16);
 
 		}
@@ -55,6 +55,17 @@ namespace FileOpen
 		{
 			string str = Box.DBroot;
 			return str + @"\" + bibleVer + @"\" + bibleVer + @"_" + bible + @".txt";
+		}
+		public string[] SetBibleVer()
+		{
+			string[] filePaths = Directory.GetDirectories(Box.DBroot);
+			string[] list = new string[filePaths.Length];
+			for(var i =0; i < filePaths.Length; i++)
+			{
+				string[] temp = filePaths[i].Split('\\');
+				list[i] = temp.Last();
+			}
+			return list;
 		}
 
 	}

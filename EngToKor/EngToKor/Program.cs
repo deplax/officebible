@@ -78,10 +78,10 @@ namespace EngToKor
 
 			AutoComplete ac = new AutoComplete();
 			KorToPhoneme ktp = new KorToPhoneme();
-			string KeyPhoneme = ktp.Trans("저노은");
+			string KeyPhoneme = ktp.Trans("우리는");
 			string[] temp = ac.WorshipSuggestProcess(KeyPhoneme);
-			//foreach (string str in temp)
-			//	Console.WriteLine(str);
+			foreach (string str in temp)
+				Console.WriteLine(str);
 			
 			
 		}
@@ -169,6 +169,7 @@ namespace EngToKor
 			KorToPhoneme ktp = new KorToPhoneme();
 
 			int[] rank = new int[worshopArr.Length];
+			int[,] rec = new int[5, 2];
 			for (var i = 0; i < worshopArr.Length; i++)
 			{
 				// Boundary 를 위해 커팅할 길이 체크
@@ -194,16 +195,15 @@ namespace EngToKor
 					}
 				}
 
-			
+				MatchRank(ref rec, i, rank[i]++);
 
 				// 일치율이 최대인 값을 저장.
 				
 			}
 			
-			string[] tt = new string[rank.Length];
+			string[] tt = new string[rec.GetLength(0)];
 			for(var i = 0; i < tt.Length; i++)
-				tt[i] = worshopArr[rank[i]];
-
+				tt[i] = worshopArr[rec[i,1]];
 			return tt;
 			//return worshopArr[topIndex];
 		}
@@ -225,6 +225,27 @@ namespace EngToKor
 			for (int i = 0; i < cnt.Length - 1; i++)
 				cnt[i + 1] = cnt[i];
 			cnt[0] = top;
+		}
+
+		public void MatchRank(ref int[,] rec, int idx, int value )
+		{
+			if(value > rec[rec.GetLength(0) - 1, 0]){
+				rec[rec.GetLength(0) - 1, 0] = value;
+				rec[rec.GetLength(0) - 1, 1] = idx;
+				for (var i = rec.GetLength(0) - 1; i > 0; i--)
+				{
+					if (rec[i, 0] > rec[i - 1, 0])
+					{
+						int[,] temp = new int[1,2];
+						temp[0, 0] = rec[i, 0];
+						temp[0, 1] = rec[i, 1];
+						rec[i, 0] = rec[i - 1, 0];
+						rec[i, 1] = rec[i - 1, 1];
+						rec[i - 1, 0] = temp[0, 0];
+						rec[i - 1, 1] = temp[0, 1];
+					}
+				}
+			}
 		}
 	}
 

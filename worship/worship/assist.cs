@@ -302,7 +302,7 @@ namespace Assist
 				{
 					if (i - 1 >= 0 && arrInfoChar[i - 1].phoneme != Phoneme.initial)
 					{
-						if (startIdx != 1)
+						if (startIdx != -1)
 							str += setPos(startIdx, i - 1, ref flag, ref arrInfoChar);
 						startIdx = i;
 					}
@@ -321,7 +321,7 @@ namespace Assist
 
 					if (i - 1 >= 0 && arrInfoChar[i - 1].phoneme != Phoneme.initial)
 					{
-						if (startIdx != 1)
+						if (startIdx != -1)
 							str += setPos(startIdx, i - 1, ref flag, ref arrInfoChar);
 						startIdx = i;
 					}

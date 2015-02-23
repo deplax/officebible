@@ -94,7 +94,7 @@ namespace worship
 
 		public string kuku(string bibleVer, string bible, int chapter, int verse)
 		{
-			FileOpen.Program pg = new FileOpen.Program();
+			FileControl.FileControl pg = new FileControl.FileControl();
 			return pg.GetBibleVerse(bibleVer, bible, chapter, verse);
 		}
 	}
