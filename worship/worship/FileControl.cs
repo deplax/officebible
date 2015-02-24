@@ -18,6 +18,7 @@ namespace FileControl
 		public static ArrayList chapterIdxList = new ArrayList();
 		public static string[] worshipList = GetFileList(@"찬양집");
 		public static string[] hymnList = GetFileList(@"새찬송가");
+		public static string[] worshipOriginList = GetFileOriginList(@"찬양집");
 
 		public string GetBibleVerse(string bibleVer, string bible, int chapter, int verse)
 		{
@@ -77,6 +78,18 @@ namespace FileControl
 				string[] temp = filePaths[i].Split('\\');
 				filePaths[i] = temp.Last();
 				filePaths[i] = filePaths[i].Replace(" ", "");
+			}
+			return filePaths;
+		}
+
+		public static string[] GetFileOriginList(string str)
+		{
+			string filePath = Box.ListRoot + @"\\" + str;
+			string[] filePaths = Directory.GetFiles(filePath);
+			for (int i = 0; i < filePaths.Length; i++)
+			{
+				string[] temp = filePaths[i].Split('\\');
+				filePaths[i] = temp.Last();
 			}
 			return filePaths;
 		}

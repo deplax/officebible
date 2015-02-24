@@ -218,7 +218,9 @@ namespace worship
 		{
 			Button btnWorship = (Button)sender;
 			worship.WorshipRibbon wr = new worship.WorshipRibbon();
-			wr.CopySlide(btnWorship.Text);
+
+			int idx = Array.IndexOf(FileControl.FileControl.worshipList, btnWorship.Text);
+			wr.CopySlide(FileControl.FileControl.worshipOriginList[idx]);
 		}
 	}
 

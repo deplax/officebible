@@ -971,6 +971,7 @@
 			this.smartSuggest01.Name = "smartSuggest01";
 			this.smartSuggest01.TabStop = false;
 			this.smartSuggest01.UseVisualStyleBackColor = false;
+			this.smartSuggest01.Click += new System.EventHandler(this.worshipClick);
 			// 
 			// textBox1
 			// 
@@ -990,6 +991,7 @@
 			this.smartSuggest02.Name = "smartSuggest02";
 			this.smartSuggest02.TabStop = false;
 			this.smartSuggest02.UseVisualStyleBackColor = false;
+			this.smartSuggest02.Click += new System.EventHandler(this.worshipClick);
 			// 
 			// smartSuggest03
 			// 
@@ -1000,6 +1002,7 @@
 			this.smartSuggest03.Name = "smartSuggest03";
 			this.smartSuggest03.TabStop = false;
 			this.smartSuggest03.UseVisualStyleBackColor = false;
+			this.smartSuggest03.Click += new System.EventHandler(this.worshipClick);
 			// 
 			// smartSuggest04
 			// 
@@ -1010,6 +1013,7 @@
 			this.smartSuggest04.Name = "smartSuggest04";
 			this.smartSuggest04.TabStop = false;
 			this.smartSuggest04.UseVisualStyleBackColor = false;
+			this.smartSuggest04.Click += new System.EventHandler(this.worshipClick);
 			// 
 			// smartSuggest05
 			// 
@@ -1020,6 +1024,7 @@
 			this.smartSuggest05.Name = "smartSuggest05";
 			this.smartSuggest05.TabStop = false;
 			this.smartSuggest05.UseVisualStyleBackColor = false;
+			this.smartSuggest05.Click += new System.EventHandler(this.worshipClick);
 			// 
 			// BibleForm
 			// 
