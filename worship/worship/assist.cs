@@ -8,6 +8,7 @@ using System.IO;
 
 namespace Assist
 {
+	
 
 	enum Syllabic : byte { none, consonant, vowel };
 	enum Phoneme : byte { none, initial, medial, final, dualMedial, dualFinal };
@@ -33,6 +34,7 @@ namespace Assist
 		public static String[] newBibleList = Box.newBibleString.Split(' ');
 		public static String[] oldBibleShortcutList = Box.oldBibleShortcutString.Split(' ');
 		public static String[] newBibleShortcutList = Box.newBibleShortcutString.Split(' ');
+
 
 		public static ArrayList BibleList()
 		{
@@ -76,6 +78,21 @@ namespace Assist
 
 	class BibleAutoComplete
 	{
+		FileControl.FileControl fc = new FileControl.FileControl();
+
+		public string OriginToShortCut(string keyword)
+		{
+			string temp = "";
+			if (Assist.Box.oldBibleList.Contains(keyword))
+				temp = Assist.Box.oldBibleShortcutList[Array.IndexOf(Assist.Box.oldBibleList, keyword)];
+			else if (Assist.Box.newBibleList.Contains(keyword))
+				temp = Assist.Box.newBibleShortcutList[Array.IndexOf(Assist.Box.newBibleList, keyword)];
+			else
+			{
+				return "error!";
+			}
+			return temp;
+		}
 
 		// 한글을 넣으면 가장 확률이 높은 요소를 반환
 		public string NormalProcess(string keyword)
@@ -142,6 +159,75 @@ namespace Assist
 			}
 			return Box.BibleList()[topIndex].ToString();
 		}
+
+		public string[] WorshipSuggestProcess(string keyword)
+		{
+			string[] worshipArr = FileControl.FileControl.worshipList;
+
+			//string[] worshipArr;
+			//if(keyword == "찬양집")
+			//	worshipArr = FileControl.FileControl.worshipList;
+			//else
+			//	worshipArr = FileControl.FileControl.hymnList;
+
+			KorToPhoneme ktp = new KorToPhoneme();
+
+			int[] rank = new int[worshipArr.Length];
+			int[,] rec = new int[5, 2];
+			for (var i = 0; i < worshipArr.Length; i++)
+			{
+				// Boundary 를 위해 커팅할 길이 체크
+				int cutLen;
+				if (worshipArr[i].Length < keyword.Length)
+					cutLen = worshipArr[i].Length;
+				else
+					cutLen = keyword.Length;
+				string tempStr = ktp.Trans(worshipArr[i]).Substring(0, cutLen);
+				char[] tempCh = tempStr.ToCharArray();
+
+				ArrayList tempStrArrList = new ArrayList();
+				tempStrArrList.AddRange(tempCh);
+
+				for (var j = 0; j < cutLen; j++)
+				{
+					if (tempStrArrList.Contains(keyword[j]))
+					{
+						rank[i]++;
+						tempStrArrList.Remove(keyword[j]);
+					}
+				}
+				MatchRank(ref rec, i, rank[i]++);
+			}
+
+			string[] rankList = new string[rec.GetLength(0)];
+			for (var i = 0; i < rankList.Length; i++)
+				rankList[i] = worshipArr[rec[i, 1]];
+			return rankList;
+		}
+
+		public void MatchRank(ref int[,] rec, int idx, int value)
+		{
+			if (value > rec[rec.GetLength(0) - 1, 0])
+			{
+				rec[rec.GetLength(0) - 1, 0] = value;
+				rec[rec.GetLength(0) - 1, 1] = idx;
+				for (var i = rec.GetLength(0) - 1; i > 0; i--)
+				{
+					if (rec[i, 0] > rec[i - 1, 0])
+					{
+						int[,] temp = new int[1, 2];
+						temp[0, 0] = rec[i, 0];
+						temp[0, 1] = rec[i, 1];
+						rec[i, 0] = rec[i - 1, 0];
+						rec[i, 1] = rec[i - 1, 1];
+						rec[i - 1, 0] = temp[0, 0];
+						rec[i - 1, 1] = temp[0, 1];
+					}
+				}
+			}
+		}
+
+
 	}
 
 
@@ -150,7 +236,6 @@ namespace Assist
 
 		public string Trans(string str)
 		{
-			//ㅣㄹ레
 			//한 글자씩 나눈다.
 			char[] arrChar = str.ToCharArray();
 			InfoChar[] arrInfoChar = new InfoChar[arrChar.Length];

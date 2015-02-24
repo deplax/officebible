@@ -17,7 +17,7 @@ namespace worship
 {
 	public partial class WorshipRibbon
 	{
-		BibleForm form = new BibleForm();
+		BibleForm bf = new BibleForm();
 		private void WorshipRibbon_Load(object sender, RibbonUIEventArgs e)
 		{
 			
@@ -27,7 +27,6 @@ namespace worship
 			int t;
 			t = group1.Items.Count();
 			
-		
 			//MessageBox.Show(t.ToString());
 
 		}
@@ -40,62 +39,52 @@ namespace worship
 
 		private void button1_Click(object sender, RibbonControlEventArgs e)
 		{
-			form.Show();
-
+			bf.Show();
 			//testCode();
-			
 		}
 
-		public void testCode(string str)
+		public void makeBibleSlide(string str)
 		{
-
-			// Create a PowerPoint application object.
-			PowerPoint.Application appPPT = Globals.ThisAddIn.Application;
-
-			// Create a new PowerPoint presentation.
-			PowerPoint.Presentation pptPresentation = appPPT.ActivePresentation;
-
-			PowerPoint.CustomLayout pptLayout = default(PowerPoint.CustomLayout);
-			if ((pptPresentation.SlideMaster.CustomLayouts._Index(7) == null))
-			{
-				pptLayout = pptPresentation.SlideMaster.CustomLayouts._Index(1);
-			}
-			else
-			{
-				pptLayout = pptPresentation.SlideMaster.CustomLayouts._Index(7);
-			}
-
-			// Create newSlide by using pptLayout.
-			//PowerPoint.Slide newSlide = pptPresentation.Slides.AddSlide((pptPresentation.Slides.Count + 1), pptLayout);
-			PowerPoint.CustomLayout customLayout = pptPresentation.SlideMaster.CustomLayouts[PowerPoint.PpSlideLayout.ppLayoutTitleOnly];
-			PowerPoint.Slide newSlide = pptPresentation.Slides.AddSlide(1, pptPresentation.SlideMaster.CustomLayouts._Index(6));
+			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
+			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
+			PowerPoint.CustomLayout customLayout = currentPT.SlideMaster.CustomLayouts[PowerPoint.PpSlideLayout.ppLayoutTitleOnly];
+			PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), currentPT.SlideMaster.CustomLayouts._Index(6));
 
 			Color myBackgroundColor = Color.Beige;
 			int oleColor = ColorTranslator.ToOle(myBackgroundColor);
 			newSlide.FollowMasterBackground = Core.MsoTriState.msoFalse;
 			newSlide.Background.Fill.ForeColor.RGB = oleColor;
-			//newSlide.Background.Fill.Visible = Core.MsoTriState.msoFalse;
 
+			//성경 구절 다자인
 			newSlide.Shapes[1].TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
 			newSlide.Shapes[1].TextFrame.TextRange.Text = str;
+			newSlide.Shapes[1].TextEffect.FontName = @"나눔고딕";
+			newSlide.Shapes[1].TextEffect.FontSize = 40;
 			newSlide.Shapes[1].Top = 200;
-
-
-			//PowerPoint.Shape textBox = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 100);
-			
-			//PowerPoint.Shape textBox2 = newSlide.Shapes.AddTitle();
-			//textBox2.TextFrame.TextRange.Text = "kukuku";
-			//textBox2.Title = "text";
-
-
-			//textBox.TextFrame.TextRange.Text = "teasdfst";
 		
 		}
 
-		public string kuku(string bibleVer, string bible, int chapter, int verse)
+
+		public void CopySlide(string str)
 		{
-			FileControl.FileControl pg = new FileControl.FileControl();
-			return pg.GetBibleVerse(bibleVer, bible, chapter, verse);
+			string filePath = "";
+			filePath = InnerBox.ListRoot + "\\" + "찬양집" + "\\" + str;
+
+			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
+			PowerPoint.Presentations currentPTs = CurrentApplication.Presentations;
+			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
+			PowerPoint.Presentation copyPT = currentPTs.Open(filePath, Core.MsoTriState.msoTrue, Core.MsoTriState.msoTrue, Core.MsoTriState.msoFalse);
+
+			for (var i = 1; i <= copyPT.Slides.Count; i++)
+			{
+				copyPT.Slides[i].Copy();
+				currentPT.Slides.Paste(currentPT.Slides.Count + 1).Design = copyPT.Slides[i].Design;
+			}
 		}
+	}
+	class InnerBox
+	{
+		public static string DBroot = @"D:\성경송출\BibleDB";
+		public static string ListRoot = @"D:\성경송출";
 	}
 }

@@ -159,13 +159,7 @@ namespace EngToKor
 		public string[] WorshipSuggestProcess(string keyword)
 		{
 			string[] worshopArr = GetFileList(@"찬양집");
-			//foreach (string str in worshopArr)
-			//	Console.WriteLine(str);
 
-
-			//성경 전용이 아니도록 고쳐야함.
-			int topIndex = 0;
-			int topValue = 0;
 			KorToPhoneme ktp = new KorToPhoneme();
 
 			int[] rank = new int[worshopArr.Length];
@@ -184,8 +178,6 @@ namespace EngToKor
 				ArrayList tempStrArrList = new ArrayList();
 				tempStrArrList.AddRange(tempCh);
 
-				int tempMatch = 0;
-
 				for (var j = 0; j < cutLen; j++)
 				{
 					if (tempStrArrList.Contains(keyword[j]))
@@ -194,18 +186,14 @@ namespace EngToKor
 						tempStrArrList.Remove(keyword[j]);
 					}
 				}
-
 				MatchRank(ref rec, i, rank[i]++);
 
-				// 일치율이 최대인 값을 저장.
-				
 			}
 			
-			string[] tt = new string[rec.GetLength(0)];
-			for(var i = 0; i < tt.Length; i++)
-				tt[i] = worshopArr[rec[i,1]];
-			return tt;
-			//return worshopArr[topIndex];
+			string[] rankList = new string[rec.GetLength(0)];
+			for(var i = 0; i < rankList.Length; i++)
+				rankList[i] = worshopArr[rec[i,1]];
+			return rankList;
 		}
 
 		public string[] GetFileList(string str)

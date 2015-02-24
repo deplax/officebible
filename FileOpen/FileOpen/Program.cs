@@ -17,8 +17,8 @@ namespace FileOpen
 		static void Main(string[] args)
 		{
 			Program pg = new Program();
-			//pg.GetBibleVerse("개역개정", "요", 3, 16);
-			pg.SetBibleVer();
+			pg.GetBibleVerse("영문NIV", "창", 1, 2);
+			//pg.SetBibleVer();
 
 
 		}
@@ -34,10 +34,11 @@ namespace FileOpen
 			ArrayList chapterIdxList = new ArrayList();
 			chapterIdxList.Add(0);
 
+			char[] charSeparators = new char[] { ',' };
 			int indexCnt = 1;
 			while ((line = file.ReadLine()) != null)
 			{
-				string[] temp = line.Split(',');
+				string[] temp = line.Split(charSeparators, 4);
 				if(Convert.ToInt16(temp[1]) == indexCnt)
 				{
 					chapterIdxList.Add(lineCounter);
@@ -50,6 +51,7 @@ namespace FileOpen
 
 			int chapterIdx = (int)chapterIdxList[chapter];
 			string[] verseStr = (string[])entireChapter[chapterIdx + (verse - 1)];
+			
 			Console.WriteLine(verseStr[3]);
 
 			Console.ReadLine();

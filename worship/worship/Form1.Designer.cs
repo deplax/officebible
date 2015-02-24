@@ -110,6 +110,12 @@
 			this.cmbBibleVer = new System.Windows.Forms.ComboBox();
 			this.lblMessage = new System.Windows.Forms.Label();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.smartSuggest01 = new System.Windows.Forms.Button();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.smartSuggest02 = new System.Windows.Forms.Button();
+			this.smartSuggest03 = new System.Windows.Forms.Button();
+			this.smartSuggest04 = new System.Windows.Forms.Button();
+			this.smartSuggest05 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -131,19 +137,22 @@
 			this.txtChapter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			resources.ApplyResources(this.txtChapter, "txtChapter");
 			this.txtChapter.Name = "txtChapter";
-			this.txtChapter.Leave += new System.EventHandler(this.txtChapterLeave);
+			this.txtChapter.Leave += new System.EventHandler(this.SetNumber);
 			// 
 			// txtVerseA
 			// 
 			this.txtVerseA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			resources.ApplyResources(this.txtVerseA, "txtVerseA");
 			this.txtVerseA.Name = "txtVerseA";
+			this.txtVerseA.Enter += new System.EventHandler(this.GetVerseInfo);
+			this.txtVerseA.Leave += new System.EventHandler(this.SetNumber);
 			// 
 			// txtVerseB
 			// 
 			this.txtVerseB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			resources.ApplyResources(this.txtVerseB, "txtVerseB");
 			this.txtVerseB.Name = "txtVerseB";
+			this.txtVerseB.Leave += new System.EventHandler(this.SetNumber);
 			// 
 			// btnMakeBible
 			// 
@@ -154,7 +163,7 @@
 			this.btnMakeBible.ForeColor = System.Drawing.Color.White;
 			this.btnMakeBible.Name = "btnMakeBible";
 			this.btnMakeBible.UseVisualStyleBackColor = false;
-			this.btnMakeBible.Click += new System.EventHandler(this.btnBibleClick);
+			this.btnMakeBible.Click += new System.EventHandler(this.btnMakeBible_Click);
 			// 
 			// label1
 			// 
@@ -205,6 +214,7 @@
 			resources.ApplyResources(this.button1, "button1");
 			this.button1.ForeColor = System.Drawing.Color.White;
 			this.button1.Name = "button1";
+			this.button1.TabStop = false;
 			this.button1.UseVisualStyleBackColor = false;
 			this.button1.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -215,6 +225,7 @@
 			resources.ApplyResources(this.button2, "button2");
 			this.button2.ForeColor = System.Drawing.Color.White;
 			this.button2.Name = "button2";
+			this.button2.TabStop = false;
 			this.button2.UseVisualStyleBackColor = false;
 			this.button2.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -225,6 +236,7 @@
 			resources.ApplyResources(this.button3, "button3");
 			this.button3.ForeColor = System.Drawing.Color.White;
 			this.button3.Name = "button3";
+			this.button3.TabStop = false;
 			this.button3.UseVisualStyleBackColor = false;
 			this.button3.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -234,7 +246,6 @@
 			resources.ApplyResources(this.pictureBox5, "pictureBox5");
 			this.pictureBox5.Name = "pictureBox5";
 			this.pictureBox5.TabStop = false;
-			this.pictureBox5.Click += new System.EventHandler(this.btnBibleClick);
 			// 
 			// button4
 			// 
@@ -243,6 +254,7 @@
 			resources.ApplyResources(this.button4, "button4");
 			this.button4.ForeColor = System.Drawing.Color.White;
 			this.button4.Name = "button4";
+			this.button4.TabStop = false;
 			this.button4.UseVisualStyleBackColor = false;
 			this.button4.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -253,6 +265,7 @@
 			resources.ApplyResources(this.button5, "button5");
 			this.button5.ForeColor = System.Drawing.Color.White;
 			this.button5.Name = "button5";
+			this.button5.TabStop = false;
 			this.button5.UseVisualStyleBackColor = false;
 			this.button5.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -263,6 +276,7 @@
 			resources.ApplyResources(this.button6, "button6");
 			this.button6.ForeColor = System.Drawing.Color.White;
 			this.button6.Name = "button6";
+			this.button6.TabStop = false;
 			this.button6.UseVisualStyleBackColor = false;
 			this.button6.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -273,6 +287,7 @@
 			resources.ApplyResources(this.button7, "button7");
 			this.button7.ForeColor = System.Drawing.Color.White;
 			this.button7.Name = "button7";
+			this.button7.TabStop = false;
 			this.button7.UseVisualStyleBackColor = false;
 			this.button7.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -283,6 +298,7 @@
 			resources.ApplyResources(this.button8, "button8");
 			this.button8.ForeColor = System.Drawing.Color.White;
 			this.button8.Name = "button8";
+			this.button8.TabStop = false;
 			this.button8.UseVisualStyleBackColor = false;
 			this.button8.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -293,6 +309,7 @@
 			resources.ApplyResources(this.button9, "button9");
 			this.button9.ForeColor = System.Drawing.Color.White;
 			this.button9.Name = "button9";
+			this.button9.TabStop = false;
 			this.button9.UseVisualStyleBackColor = false;
 			this.button9.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -303,6 +320,7 @@
 			resources.ApplyResources(this.button10, "button10");
 			this.button10.ForeColor = System.Drawing.Color.White;
 			this.button10.Name = "button10";
+			this.button10.TabStop = false;
 			this.button10.UseVisualStyleBackColor = false;
 			this.button10.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -313,6 +331,7 @@
 			resources.ApplyResources(this.button11, "button11");
 			this.button11.ForeColor = System.Drawing.Color.White;
 			this.button11.Name = "button11";
+			this.button11.TabStop = false;
 			this.button11.UseVisualStyleBackColor = false;
 			this.button11.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -323,6 +342,7 @@
 			resources.ApplyResources(this.button12, "button12");
 			this.button12.ForeColor = System.Drawing.Color.White;
 			this.button12.Name = "button12";
+			this.button12.TabStop = false;
 			this.button12.UseVisualStyleBackColor = false;
 			this.button12.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -333,6 +353,7 @@
 			resources.ApplyResources(this.button13, "button13");
 			this.button13.ForeColor = System.Drawing.Color.White;
 			this.button13.Name = "button13";
+			this.button13.TabStop = false;
 			this.button13.UseVisualStyleBackColor = false;
 			this.button13.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -343,6 +364,7 @@
 			resources.ApplyResources(this.button14, "button14");
 			this.button14.ForeColor = System.Drawing.Color.White;
 			this.button14.Name = "button14";
+			this.button14.TabStop = false;
 			this.button14.UseVisualStyleBackColor = false;
 			this.button14.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -353,6 +375,7 @@
 			resources.ApplyResources(this.button15, "button15");
 			this.button15.ForeColor = System.Drawing.Color.White;
 			this.button15.Name = "button15";
+			this.button15.TabStop = false;
 			this.button15.UseVisualStyleBackColor = false;
 			this.button15.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -363,6 +386,7 @@
 			resources.ApplyResources(this.button16, "button16");
 			this.button16.ForeColor = System.Drawing.Color.White;
 			this.button16.Name = "button16";
+			this.button16.TabStop = false;
 			this.button16.UseVisualStyleBackColor = false;
 			this.button16.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -373,6 +397,7 @@
 			resources.ApplyResources(this.button17, "button17");
 			this.button17.ForeColor = System.Drawing.Color.White;
 			this.button17.Name = "button17";
+			this.button17.TabStop = false;
 			this.button17.UseVisualStyleBackColor = false;
 			this.button17.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -383,6 +408,7 @@
 			resources.ApplyResources(this.button18, "button18");
 			this.button18.ForeColor = System.Drawing.Color.White;
 			this.button18.Name = "button18";
+			this.button18.TabStop = false;
 			this.button18.UseVisualStyleBackColor = false;
 			this.button18.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -393,6 +419,7 @@
 			resources.ApplyResources(this.button19, "button19");
 			this.button19.ForeColor = System.Drawing.Color.White;
 			this.button19.Name = "button19";
+			this.button19.TabStop = false;
 			this.button19.UseVisualStyleBackColor = false;
 			this.button19.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -403,6 +430,7 @@
 			resources.ApplyResources(this.button20, "button20");
 			this.button20.ForeColor = System.Drawing.Color.White;
 			this.button20.Name = "button20";
+			this.button20.TabStop = false;
 			this.button20.UseVisualStyleBackColor = false;
 			this.button20.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -413,6 +441,7 @@
 			resources.ApplyResources(this.button21, "button21");
 			this.button21.ForeColor = System.Drawing.Color.White;
 			this.button21.Name = "button21";
+			this.button21.TabStop = false;
 			this.button21.UseVisualStyleBackColor = false;
 			this.button21.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -423,6 +452,7 @@
 			resources.ApplyResources(this.button22, "button22");
 			this.button22.ForeColor = System.Drawing.Color.White;
 			this.button22.Name = "button22";
+			this.button22.TabStop = false;
 			this.button22.UseVisualStyleBackColor = false;
 			this.button22.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -433,6 +463,7 @@
 			resources.ApplyResources(this.button23, "button23");
 			this.button23.ForeColor = System.Drawing.Color.White;
 			this.button23.Name = "button23";
+			this.button23.TabStop = false;
 			this.button23.UseVisualStyleBackColor = false;
 			this.button23.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -443,6 +474,7 @@
 			resources.ApplyResources(this.button24, "button24");
 			this.button24.ForeColor = System.Drawing.Color.White;
 			this.button24.Name = "button24";
+			this.button24.TabStop = false;
 			this.button24.UseVisualStyleBackColor = false;
 			this.button24.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -453,6 +485,7 @@
 			resources.ApplyResources(this.button25, "button25");
 			this.button25.ForeColor = System.Drawing.Color.White;
 			this.button25.Name = "button25";
+			this.button25.TabStop = false;
 			this.button25.UseVisualStyleBackColor = false;
 			this.button25.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -463,6 +496,7 @@
 			resources.ApplyResources(this.button26, "button26");
 			this.button26.ForeColor = System.Drawing.Color.White;
 			this.button26.Name = "button26";
+			this.button26.TabStop = false;
 			this.button26.UseVisualStyleBackColor = false;
 			this.button26.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -473,6 +507,7 @@
 			resources.ApplyResources(this.button27, "button27");
 			this.button27.ForeColor = System.Drawing.Color.White;
 			this.button27.Name = "button27";
+			this.button27.TabStop = false;
 			this.button27.UseVisualStyleBackColor = false;
 			this.button27.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -483,6 +518,7 @@
 			resources.ApplyResources(this.button28, "button28");
 			this.button28.ForeColor = System.Drawing.Color.White;
 			this.button28.Name = "button28";
+			this.button28.TabStop = false;
 			this.button28.UseVisualStyleBackColor = false;
 			this.button28.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -493,6 +529,7 @@
 			resources.ApplyResources(this.button29, "button29");
 			this.button29.ForeColor = System.Drawing.Color.White;
 			this.button29.Name = "button29";
+			this.button29.TabStop = false;
 			this.button29.UseVisualStyleBackColor = false;
 			this.button29.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -503,6 +540,7 @@
 			resources.ApplyResources(this.button30, "button30");
 			this.button30.ForeColor = System.Drawing.Color.White;
 			this.button30.Name = "button30";
+			this.button30.TabStop = false;
 			this.button30.UseVisualStyleBackColor = false;
 			this.button30.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -513,6 +551,7 @@
 			resources.ApplyResources(this.button31, "button31");
 			this.button31.ForeColor = System.Drawing.Color.White;
 			this.button31.Name = "button31";
+			this.button31.TabStop = false;
 			this.button31.UseVisualStyleBackColor = false;
 			this.button31.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -523,6 +562,7 @@
 			resources.ApplyResources(this.button32, "button32");
 			this.button32.ForeColor = System.Drawing.Color.White;
 			this.button32.Name = "button32";
+			this.button32.TabStop = false;
 			this.button32.UseVisualStyleBackColor = false;
 			this.button32.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -533,6 +573,7 @@
 			resources.ApplyResources(this.button33, "button33");
 			this.button33.ForeColor = System.Drawing.Color.White;
 			this.button33.Name = "button33";
+			this.button33.TabStop = false;
 			this.button33.UseVisualStyleBackColor = false;
 			this.button33.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -543,6 +584,7 @@
 			resources.ApplyResources(this.button34, "button34");
 			this.button34.ForeColor = System.Drawing.Color.White;
 			this.button34.Name = "button34";
+			this.button34.TabStop = false;
 			this.button34.UseVisualStyleBackColor = false;
 			this.button34.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -553,6 +595,7 @@
 			resources.ApplyResources(this.button35, "button35");
 			this.button35.ForeColor = System.Drawing.Color.White;
 			this.button35.Name = "button35";
+			this.button35.TabStop = false;
 			this.button35.UseVisualStyleBackColor = false;
 			this.button35.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -563,6 +606,7 @@
 			resources.ApplyResources(this.button36, "button36");
 			this.button36.ForeColor = System.Drawing.Color.White;
 			this.button36.Name = "button36";
+			this.button36.TabStop = false;
 			this.button36.UseVisualStyleBackColor = false;
 			this.button36.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -573,6 +617,7 @@
 			resources.ApplyResources(this.button37, "button37");
 			this.button37.ForeColor = System.Drawing.Color.White;
 			this.button37.Name = "button37";
+			this.button37.TabStop = false;
 			this.button37.UseVisualStyleBackColor = false;
 			this.button37.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -583,6 +628,7 @@
 			resources.ApplyResources(this.button38, "button38");
 			this.button38.ForeColor = System.Drawing.Color.White;
 			this.button38.Name = "button38";
+			this.button38.TabStop = false;
 			this.button38.UseVisualStyleBackColor = false;
 			this.button38.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -593,6 +639,7 @@
 			resources.ApplyResources(this.button39, "button39");
 			this.button39.ForeColor = System.Drawing.Color.White;
 			this.button39.Name = "button39";
+			this.button39.TabStop = false;
 			this.button39.UseVisualStyleBackColor = false;
 			this.button39.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -603,6 +650,7 @@
 			resources.ApplyResources(this.button40, "button40");
 			this.button40.ForeColor = System.Drawing.Color.White;
 			this.button40.Name = "button40";
+			this.button40.TabStop = false;
 			this.button40.UseVisualStyleBackColor = false;
 			this.button40.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -613,6 +661,7 @@
 			resources.ApplyResources(this.button41, "button41");
 			this.button41.ForeColor = System.Drawing.Color.White;
 			this.button41.Name = "button41";
+			this.button41.TabStop = false;
 			this.button41.UseVisualStyleBackColor = false;
 			this.button41.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -623,6 +672,7 @@
 			resources.ApplyResources(this.button42, "button42");
 			this.button42.ForeColor = System.Drawing.Color.White;
 			this.button42.Name = "button42";
+			this.button42.TabStop = false;
 			this.button42.UseVisualStyleBackColor = false;
 			this.button42.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -633,6 +683,7 @@
 			resources.ApplyResources(this.button43, "button43");
 			this.button43.ForeColor = System.Drawing.Color.White;
 			this.button43.Name = "button43";
+			this.button43.TabStop = false;
 			this.button43.UseVisualStyleBackColor = false;
 			this.button43.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -643,6 +694,7 @@
 			resources.ApplyResources(this.button44, "button44");
 			this.button44.ForeColor = System.Drawing.Color.White;
 			this.button44.Name = "button44";
+			this.button44.TabStop = false;
 			this.button44.UseVisualStyleBackColor = false;
 			this.button44.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -653,6 +705,7 @@
 			resources.ApplyResources(this.button45, "button45");
 			this.button45.ForeColor = System.Drawing.Color.White;
 			this.button45.Name = "button45";
+			this.button45.TabStop = false;
 			this.button45.UseVisualStyleBackColor = false;
 			this.button45.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -663,6 +716,7 @@
 			resources.ApplyResources(this.button46, "button46");
 			this.button46.ForeColor = System.Drawing.Color.White;
 			this.button46.Name = "button46";
+			this.button46.TabStop = false;
 			this.button46.UseVisualStyleBackColor = false;
 			this.button46.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -673,6 +727,7 @@
 			resources.ApplyResources(this.button47, "button47");
 			this.button47.ForeColor = System.Drawing.Color.White;
 			this.button47.Name = "button47";
+			this.button47.TabStop = false;
 			this.button47.UseVisualStyleBackColor = false;
 			this.button47.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -683,6 +738,7 @@
 			resources.ApplyResources(this.button48, "button48");
 			this.button48.ForeColor = System.Drawing.Color.White;
 			this.button48.Name = "button48";
+			this.button48.TabStop = false;
 			this.button48.UseVisualStyleBackColor = false;
 			this.button48.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -693,6 +749,7 @@
 			resources.ApplyResources(this.button49, "button49");
 			this.button49.ForeColor = System.Drawing.Color.White;
 			this.button49.Name = "button49";
+			this.button49.TabStop = false;
 			this.button49.UseVisualStyleBackColor = false;
 			this.button49.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -703,6 +760,7 @@
 			resources.ApplyResources(this.button50, "button50");
 			this.button50.ForeColor = System.Drawing.Color.White;
 			this.button50.Name = "button50";
+			this.button50.TabStop = false;
 			this.button50.UseVisualStyleBackColor = false;
 			this.button50.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -713,6 +771,7 @@
 			resources.ApplyResources(this.button51, "button51");
 			this.button51.ForeColor = System.Drawing.Color.White;
 			this.button51.Name = "button51";
+			this.button51.TabStop = false;
 			this.button51.UseVisualStyleBackColor = false;
 			this.button51.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -723,6 +782,7 @@
 			resources.ApplyResources(this.button52, "button52");
 			this.button52.ForeColor = System.Drawing.Color.White;
 			this.button52.Name = "button52";
+			this.button52.TabStop = false;
 			this.button52.UseVisualStyleBackColor = false;
 			this.button52.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -733,6 +793,7 @@
 			resources.ApplyResources(this.button53, "button53");
 			this.button53.ForeColor = System.Drawing.Color.White;
 			this.button53.Name = "button53";
+			this.button53.TabStop = false;
 			this.button53.UseVisualStyleBackColor = false;
 			this.button53.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -743,6 +804,7 @@
 			resources.ApplyResources(this.button54, "button54");
 			this.button54.ForeColor = System.Drawing.Color.White;
 			this.button54.Name = "button54";
+			this.button54.TabStop = false;
 			this.button54.UseVisualStyleBackColor = false;
 			this.button54.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -753,6 +815,7 @@
 			resources.ApplyResources(this.button55, "button55");
 			this.button55.ForeColor = System.Drawing.Color.White;
 			this.button55.Name = "button55";
+			this.button55.TabStop = false;
 			this.button55.UseVisualStyleBackColor = false;
 			this.button55.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -763,6 +826,7 @@
 			resources.ApplyResources(this.button56, "button56");
 			this.button56.ForeColor = System.Drawing.Color.White;
 			this.button56.Name = "button56";
+			this.button56.TabStop = false;
 			this.button56.UseVisualStyleBackColor = false;
 			this.button56.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -773,6 +837,7 @@
 			resources.ApplyResources(this.button57, "button57");
 			this.button57.ForeColor = System.Drawing.Color.White;
 			this.button57.Name = "button57";
+			this.button57.TabStop = false;
 			this.button57.UseVisualStyleBackColor = false;
 			this.button57.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -783,6 +848,7 @@
 			resources.ApplyResources(this.button58, "button58");
 			this.button58.ForeColor = System.Drawing.Color.White;
 			this.button58.Name = "button58";
+			this.button58.TabStop = false;
 			this.button58.UseVisualStyleBackColor = false;
 			this.button58.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -793,6 +859,7 @@
 			resources.ApplyResources(this.button59, "button59");
 			this.button59.ForeColor = System.Drawing.Color.White;
 			this.button59.Name = "button59";
+			this.button59.TabStop = false;
 			this.button59.UseVisualStyleBackColor = false;
 			this.button59.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -803,6 +870,7 @@
 			resources.ApplyResources(this.button60, "button60");
 			this.button60.ForeColor = System.Drawing.Color.White;
 			this.button60.Name = "button60";
+			this.button60.TabStop = false;
 			this.button60.UseVisualStyleBackColor = false;
 			this.button60.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -813,6 +881,7 @@
 			resources.ApplyResources(this.button61, "button61");
 			this.button61.ForeColor = System.Drawing.Color.White;
 			this.button61.Name = "button61";
+			this.button61.TabStop = false;
 			this.button61.UseVisualStyleBackColor = false;
 			this.button61.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -823,6 +892,7 @@
 			resources.ApplyResources(this.button62, "button62");
 			this.button62.ForeColor = System.Drawing.Color.White;
 			this.button62.Name = "button62";
+			this.button62.TabStop = false;
 			this.button62.UseVisualStyleBackColor = false;
 			this.button62.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -833,6 +903,7 @@
 			resources.ApplyResources(this.button63, "button63");
 			this.button63.ForeColor = System.Drawing.Color.White;
 			this.button63.Name = "button63";
+			this.button63.TabStop = false;
 			this.button63.UseVisualStyleBackColor = false;
 			this.button63.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -843,6 +914,7 @@
 			resources.ApplyResources(this.button64, "button64");
 			this.button64.ForeColor = System.Drawing.Color.White;
 			this.button64.Name = "button64";
+			this.button64.TabStop = false;
 			this.button64.UseVisualStyleBackColor = false;
 			this.button64.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -853,6 +925,7 @@
 			resources.ApplyResources(this.button65, "button65");
 			this.button65.ForeColor = System.Drawing.Color.White;
 			this.button65.Name = "button65";
+			this.button65.TabStop = false;
 			this.button65.UseVisualStyleBackColor = false;
 			this.button65.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -863,6 +936,7 @@
 			resources.ApplyResources(this.button66, "button66");
 			this.button66.ForeColor = System.Drawing.Color.White;
 			this.button66.Name = "button66";
+			this.button66.TabStop = false;
 			this.button66.UseVisualStyleBackColor = false;
 			this.button66.Click += new System.EventHandler(this.btnBibleClick);
 			// 
@@ -888,11 +962,76 @@
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.TabStop = false;
 			// 
+			// smartSuggest01
+			// 
+			this.smartSuggest01.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+			this.smartSuggest01.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.smartSuggest01, "smartSuggest01");
+			this.smartSuggest01.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.smartSuggest01.Name = "smartSuggest01";
+			this.smartSuggest01.TabStop = false;
+			this.smartSuggest01.UseVisualStyleBackColor = false;
+			// 
+			// textBox1
+			// 
+			this.textBox1.BackColor = System.Drawing.Color.White;
+			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
+			resources.ApplyResources(this.textBox1, "textBox1");
+			this.textBox1.Name = "textBox1";
+			this.textBox1.TextChanged += new System.EventHandler(this.worshipSerchTxtChanged);
+			// 
+			// smartSuggest02
+			// 
+			this.smartSuggest02.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+			this.smartSuggest02.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.smartSuggest02, "smartSuggest02");
+			this.smartSuggest02.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.smartSuggest02.Name = "smartSuggest02";
+			this.smartSuggest02.TabStop = false;
+			this.smartSuggest02.UseVisualStyleBackColor = false;
+			// 
+			// smartSuggest03
+			// 
+			this.smartSuggest03.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+			this.smartSuggest03.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.smartSuggest03, "smartSuggest03");
+			this.smartSuggest03.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.smartSuggest03.Name = "smartSuggest03";
+			this.smartSuggest03.TabStop = false;
+			this.smartSuggest03.UseVisualStyleBackColor = false;
+			// 
+			// smartSuggest04
+			// 
+			this.smartSuggest04.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+			this.smartSuggest04.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.smartSuggest04, "smartSuggest04");
+			this.smartSuggest04.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.smartSuggest04.Name = "smartSuggest04";
+			this.smartSuggest04.TabStop = false;
+			this.smartSuggest04.UseVisualStyleBackColor = false;
+			// 
+			// smartSuggest05
+			// 
+			this.smartSuggest05.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+			this.smartSuggest05.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.smartSuggest05, "smartSuggest05");
+			this.smartSuggest05.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.smartSuggest05.Name = "smartSuggest05";
+			this.smartSuggest05.TabStop = false;
+			this.smartSuggest05.UseVisualStyleBackColor = false;
+			// 
 			// BibleForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Menu;
+			this.Controls.Add(this.smartSuggest05);
+			this.Controls.Add(this.smartSuggest04);
+			this.Controls.Add(this.smartSuggest03);
+			this.Controls.Add(this.smartSuggest02);
+			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.smartSuggest01);
 			this.Controls.Add(this.lblMessage);
 			this.Controls.Add(this.button66);
 			this.Controls.Add(this.button65);
@@ -980,7 +1119,6 @@
 			this.Name = "BibleForm";
 			this.Opacity = 0.95D;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1076,5 +1214,11 @@
 		private System.Windows.Forms.ComboBox cmbBibleVer;
 		private System.Windows.Forms.Label lblMessage;
 		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.Button smartSuggest01;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Button smartSuggest02;
+		private System.Windows.Forms.Button smartSuggest03;
+		private System.Windows.Forms.Button smartSuggest04;
+		private System.Windows.Forms.Button smartSuggest05;
 	}
 }
