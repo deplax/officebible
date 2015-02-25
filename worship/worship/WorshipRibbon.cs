@@ -18,16 +18,9 @@ namespace worship
 	public partial class WorshipRibbon
 	{
 		BibleForm bf = new BibleForm();
+		
 		private void WorshipRibbon_Load(object sender, RibbonUIEventArgs e)
 		{
-			
-			tab1.Groups[0].Visible = true;
-			//tab1.Groups[0].Items[1].Visible = false;
-			//group1.Items[0].Visible = false;
-			int t;
-			t = group1.Items.Count();
-			
-			//MessageBox.Show(t.ToString());
 
 		}
 
@@ -39,8 +32,8 @@ namespace worship
 
 		private void button1_Click(object sender, RibbonControlEventArgs e)
 		{
+			
 			bf.Show();
-			//testCode();
 		}
 
 		public void makeBibleSlide(string str)
@@ -57,9 +50,9 @@ namespace worship
 
 			//성경 구절 다자인
 			newSlide.Shapes[1].TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
-			newSlide.Shapes[1].TextFrame.TextRange.Text = str;
 			newSlide.Shapes[1].TextEffect.FontName = @"나눔고딕";
 			newSlide.Shapes[1].TextEffect.FontSize = 40;
+			newSlide.Shapes[1].TextFrame.TextRange.Text = str;
 			newSlide.Shapes[1].Top = 200;
 		
 		}
@@ -80,6 +73,11 @@ namespace worship
 				copyPT.Slides[i].Copy();
 				currentPT.Slides.Paste(currentPT.Slides.Count + 1).Design = copyPT.Slides[i].Design;
 			}
+		}
+
+		private void WorshipRibbon_Close(object sender, EventArgs e)
+		{
+			bf.Close();
 		}
 	}
 	class InnerBox

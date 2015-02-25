@@ -17,20 +17,101 @@ namespace worship
 		Assist.KorToPhoneme ktp = new Assist.KorToPhoneme();
 		Assist.BibleAutoComplete bac = new Assist.BibleAutoComplete();
 		Assist.EngToKor etk = new Assist.EngToKor();
-		
+
+		private KeyButton[] smartSuggest;
 
 		Boolean isClick = false;
+		Boolean isWorship = true;
+
+		protected override bool IsInputKey(Keys keyData)
+		{
+			switch (keyData)
+			{
+				case Keys.Right:
+				case Keys.Left:
+				case Keys.Up:
+				case Keys.Down:
+					return true;
+				case Keys.Shift | Keys.Right:
+				case Keys.Shift | Keys.Left:
+				case Keys.Shift | Keys.Up:
+				case Keys.Shift | Keys.Down:
+					return true;
+			}
+			return base.IsInputKey(keyData);
+		}
+
 		public BibleForm()
 		{
 			InitializeComponent();
+			SetSuggestArr();
+		}
+
+		public void SetSuggestArr()
+		{
+			bool colorSwitch = true;
+			smartSuggest = new KeyButton[5];
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BibleForm));
+			for (var i = 0; i < smartSuggest.Length; i++)
+			{
+				smartSuggest[i] = new KeyButton();
+				if (colorSwitch == true)
+				{
+					smartSuggest[i].BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+					colorSwitch = false;
+				}
+				else
+				{
+					smartSuggest[i].BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+					colorSwitch = true;
+				}
+				smartSuggest[i].ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+				smartSuggest[i].FlatAppearance.BorderSize = 0;
+				smartSuggest[i].UseVisualStyleBackColor = false;
+				smartSuggest[i].SetBounds(253, 112 + (i * 22), 173, 22);
+				smartSuggest[i].FlatStyle = FlatStyle.Flat;
+				smartSuggest[i].Visible = true;
+				smartSuggest[i].Tag = i;
+				smartSuggest[i].TabStop = false;
+
+				resources.ApplyResources(this.smartSuggest[i], "smartSuggest" + i);
+				resources.ApplyResources(this, "$this");
+
+				this.smartSuggest[i].KeyDown += new System.Windows.Forms.KeyEventHandler(CheckWorshipAllow);
+				this.smartSuggest[i].Click += new System.EventHandler(this.worshipClick);
+				this.smartSuggest[i].GotFocus += new System.EventHandler(this.SelectButton);
+				this.smartSuggest[i].LostFocus += new System.EventHandler(this.DiselectButton);
+				Controls.Add(this.smartSuggest[i]);
+			}
+		}
+
+		private void SelectButton(object sender, EventArgs e)
+		{
+			Button btn = (Button) sender;
+			btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+		}
+		private void DiselectButton(object sender, EventArgs e)
+		{
+			Button btn = (Button)sender;
+			btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
 
 			SetBibleVer();
-			this.txtBible.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckEnter);
+			this.txtChapter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckBibleEnter);
+			this.txtVerseA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckBibleEnter);
+			this.txtVerseB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckBibleEnter);
 
+			this.KeyPreview = true;
+			this.KeyDown += new KeyEventHandler(DetectESC);
+		}
+
+		private void DetectESC(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				this.Hide();
 		}
 
 		private void SetBibleVer()
@@ -41,8 +122,7 @@ namespace worship
 				cmbBibleVer.Items.Add(verList[i]);
 			}
 			cmbBibleVer.SelectedIndex = 0;
-		}
-
+		}		
 
 		private void btnMakeBible_Click(object sender, EventArgs e)
 		{
@@ -53,7 +133,7 @@ namespace worship
 
 			isClick = true;
 
-			
+
 			string bibleVer = cmbBibleVer.Text;
 			string bible = txtBible.Text;
 
@@ -129,14 +209,48 @@ namespace worship
 				string verse = fc.GetBibleVerse(bibleVer, bible, chapter, verseA);
 				wr.makeBibleSlide(verse);
 			}
+			this.Hide();
 		}
 
-		private void CheckEnter(object sender, System.Windows.Forms.KeyPressEventArgs e)
+		private void CheckBibleEnter(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Enter)
 			{
-				MessageBox.Show("press enter");
-				this.ActiveControl = txtVerseB;
+				btnMakeBible_Click(sender, e);
+			}
+		}
+		private void CheckWorshipAllow(object sender, KeyEventArgs e)
+		{
+			Button btn = (Button)sender;
+
+			if (e.KeyCode == Keys.Up)
+			{
+				if ((int)btn.Tag == 0)
+				{
+					this.ActiveControl = txtWorship;
+					return;
+				}
+				this.ActiveControl = smartSuggest[(int)btn.Tag - 1];
+			}
+			if (e.KeyCode == Keys.Down)
+			{
+				if ((int)btn.Tag == 4)
+				{
+					this.ActiveControl = smartSuggest[(int)btn.Tag];
+					return;
+				}
+				this.ActiveControl = smartSuggest[(int)btn.Tag + 1];
+			}
+
+		}
+
+		private void CheckWorshipKey(object sender, System.Windows.Forms.KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter)
+				this.ActiveControl = smartSuggest[0];
+			if (e.KeyChar == (char)Keys.Down)
+			{
+				this.ActiveControl = smartSuggest[0];
 			}
 		}
 
@@ -201,35 +315,88 @@ namespace worship
 			{
 				lblMessage.Text = "[위험] btnBibleClick에서 오류가 발생했습니다.";
 			}
+			this.ActiveControl = txtChapter;
 		}
 
 		private void worshipSerchTxtChanged(object sender, EventArgs e)
 		{
-			string KeyPhoneme = ktp.Trans(etk.Trans(textBox1.Text));
+			string KeyPhoneme = ktp.Trans(etk.Trans(txtWorship.Text));
 			string[] ranking = bac.WorshipSuggestProcess(KeyPhoneme);
-			smartSuggest01.Text = ranking[0];
-			smartSuggest02.Text = ranking[1];
-			smartSuggest03.Text = ranking[2];
-			smartSuggest04.Text = ranking[3];
-			smartSuggest05.Text = ranking[4];
+			for (var i = 0; i < smartSuggest.Length; i++)
+				smartSuggest[i].Text = ranking[i];
 		}
 
 		private void worshipClick(object sender, EventArgs e)
 		{
 			Button btnWorship = (Button)sender;
+			if (btnWorship.Text == "")
+			{
+				lblMessage.Text = "[주의] 찬송가 / 찬양집을 검색하지 않았습니다.";
+				return;
+			}
+
 			worship.WorshipRibbon wr = new worship.WorshipRibbon();
 
 			int idx = Array.IndexOf(FileControl.FileControl.worshipList, btnWorship.Text);
 			wr.CopySlide(FileControl.FileControl.worshipOriginList[idx]);
 		}
-	}
 
-
-	class Checker
-	{
-		public void isNumber()
+		private void BibleForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			//입력값이 숫자인지 확인
+			this.Hide();
+			e.Cancel = true;
 		}
+
+		private void txtWorship_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+				this.ActiveControl = smartSuggest[0];
+			if (e.KeyCode == Keys.Down)
+			{
+				this.ActiveControl = smartSuggest[0];
+			}
+		}
+
+
+
+	}
+	class KeyButton : Button
+	{
+ 		protected override bool IsInputKey(Keys keyData)
+		{
+			switch (keyData)
+			{
+				case Keys.Right:
+				case Keys.Left:
+				case Keys.Up:
+				case Keys.Down:
+					return true;
+				case Keys.Shift | Keys.Right:
+				case Keys.Shift | Keys.Left:
+				case Keys.Shift | Keys.Up:
+				case Keys.Shift | Keys.Down:
+					return true;
+			}
+			return base.IsInputKey(keyData);
+		}
+		//protected override void OnKeyDown(KeyEventArgs e)
+		//{
+		//	base.OnKeyDown(e);
+		//	switch (e.KeyCode)
+		//	{
+		//		case Keys.Left:
+		//		case Keys.Right:
+		//		case Keys.Up:
+		//		case Keys.Down:
+		//			if (e.Shift)
+		//			{
+
+		//			}
+		//			else
+		//			{
+		//			}
+		//			break;
+		//	}
+		//}
 	}
 }

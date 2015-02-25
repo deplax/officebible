@@ -110,12 +110,9 @@
 			this.cmbBibleVer = new System.Windows.Forms.ComboBox();
 			this.lblMessage = new System.Windows.Forms.Label();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
-			this.smartSuggest01 = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.smartSuggest02 = new System.Windows.Forms.Button();
-			this.smartSuggest03 = new System.Windows.Forms.Button();
-			this.smartSuggest04 = new System.Windows.Forms.Button();
-			this.smartSuggest05 = new System.Windows.Forms.Button();
+			this.txtWorship = new System.Windows.Forms.TextBox();
+			this.button68 = new System.Windows.Forms.Button();
+			this.button67 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -947,6 +944,7 @@
 			this.cmbBibleVer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.cmbBibleVer.FormattingEnabled = true;
 			this.cmbBibleVer.Name = "cmbBibleVer";
+			this.cmbBibleVer.TabStop = false;
 			// 
 			// lblMessage
 			// 
@@ -962,81 +960,44 @@
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.TabStop = false;
 			// 
-			// smartSuggest01
+			// txtWorship
 			// 
-			this.smartSuggest01.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
-			this.smartSuggest01.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.smartSuggest01, "smartSuggest01");
-			this.smartSuggest01.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.smartSuggest01.Name = "smartSuggest01";
-			this.smartSuggest01.TabStop = false;
-			this.smartSuggest01.UseVisualStyleBackColor = false;
-			this.smartSuggest01.Click += new System.EventHandler(this.worshipClick);
+			this.txtWorship.BackColor = System.Drawing.Color.White;
+			this.txtWorship.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.txtWorship.Cursor = System.Windows.Forms.Cursors.Default;
+			resources.ApplyResources(this.txtWorship, "txtWorship");
+			this.txtWorship.Name = "txtWorship";
+			this.txtWorship.TextChanged += new System.EventHandler(this.worshipSerchTxtChanged);
+			this.txtWorship.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWorship_KeyDown);
 			// 
-			// textBox1
+			// button68
 			// 
-			this.textBox1.BackColor = System.Drawing.Color.White;
-			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-			resources.ApplyResources(this.textBox1, "textBox1");
-			this.textBox1.Name = "textBox1";
-			this.textBox1.TextChanged += new System.EventHandler(this.worshipSerchTxtChanged);
+			this.button68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+			this.button68.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.button68, "button68");
+			this.button68.ForeColor = System.Drawing.Color.White;
+			this.button68.Name = "button68";
+			this.button68.TabStop = false;
+			this.button68.UseVisualStyleBackColor = false;
 			// 
-			// smartSuggest02
+			// button67
 			// 
-			this.smartSuggest02.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-			this.smartSuggest02.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.smartSuggest02, "smartSuggest02");
-			this.smartSuggest02.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.smartSuggest02.Name = "smartSuggest02";
-			this.smartSuggest02.TabStop = false;
-			this.smartSuggest02.UseVisualStyleBackColor = false;
-			this.smartSuggest02.Click += new System.EventHandler(this.worshipClick);
-			// 
-			// smartSuggest03
-			// 
-			this.smartSuggest03.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
-			this.smartSuggest03.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.smartSuggest03, "smartSuggest03");
-			this.smartSuggest03.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.smartSuggest03.Name = "smartSuggest03";
-			this.smartSuggest03.TabStop = false;
-			this.smartSuggest03.UseVisualStyleBackColor = false;
-			this.smartSuggest03.Click += new System.EventHandler(this.worshipClick);
-			// 
-			// smartSuggest04
-			// 
-			this.smartSuggest04.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-			this.smartSuggest04.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.smartSuggest04, "smartSuggest04");
-			this.smartSuggest04.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.smartSuggest04.Name = "smartSuggest04";
-			this.smartSuggest04.TabStop = false;
-			this.smartSuggest04.UseVisualStyleBackColor = false;
-			this.smartSuggest04.Click += new System.EventHandler(this.worshipClick);
-			// 
-			// smartSuggest05
-			// 
-			this.smartSuggest05.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
-			this.smartSuggest05.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.smartSuggest05, "smartSuggest05");
-			this.smartSuggest05.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.smartSuggest05.Name = "smartSuggest05";
-			this.smartSuggest05.TabStop = false;
-			this.smartSuggest05.UseVisualStyleBackColor = false;
-			this.smartSuggest05.Click += new System.EventHandler(this.worshipClick);
+			this.button67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+			this.button67.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.button67, "button67");
+			this.button67.ForeColor = System.Drawing.Color.White;
+			this.button67.Name = "button67";
+			this.button67.TabStop = false;
+			this.button67.UseVisualStyleBackColor = false;
 			// 
 			// BibleForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Menu;
-			this.Controls.Add(this.smartSuggest05);
-			this.Controls.Add(this.smartSuggest04);
-			this.Controls.Add(this.smartSuggest03);
-			this.Controls.Add(this.smartSuggest02);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.smartSuggest01);
+			this.Controls.Add(this.button67);
+			this.Controls.Add(this.button68);
+			this.Controls.Add(this.txtWorship);
 			this.Controls.Add(this.lblMessage);
 			this.Controls.Add(this.button66);
 			this.Controls.Add(this.button65);
@@ -1122,9 +1083,10 @@
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "BibleForm";
-			this.Opacity = 0.95D;
+			this.Opacity = 0.9D;
 			this.ShowIcon = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BibleForm_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -1219,11 +1181,8 @@
 		private System.Windows.Forms.ComboBox cmbBibleVer;
 		private System.Windows.Forms.Label lblMessage;
 		private System.Windows.Forms.PictureBox pictureBox2;
-		private System.Windows.Forms.Button smartSuggest01;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Button smartSuggest02;
-		private System.Windows.Forms.Button smartSuggest03;
-		private System.Windows.Forms.Button smartSuggest04;
-		private System.Windows.Forms.Button smartSuggest05;
+		private System.Windows.Forms.TextBox txtWorship;
+		private System.Windows.Forms.Button button68;
+		private System.Windows.Forms.Button button67;
 	}
 }
