@@ -36,7 +36,7 @@ namespace worship
 			bf.Show();
 		}
 
-		public void makeBibleSlide(string str)
+		public void makeBibleSlide(string str, int verse)
 		{
 			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
 			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
@@ -58,7 +58,7 @@ namespace worship
 			//newSlide.Shapes[1].TextEffect.FontSize = 60;
 			newSlide.Shapes[1].TextFrame.TextRange.Font.Name = "나눔바른펜";
 			newSlide.Shapes[1].TextFrame.TextRange.Font.Size = 60;
-			newSlide.Shapes[1].TextFrame.TextRange.Text = str;
+			newSlide.Shapes[1].TextFrame.TextRange.Text = verse + ". " + str;
 			newSlide.Shapes[1].Top = (slideHeight / 2) - (newSlide.Shapes[1].Height / 2);
 
 		

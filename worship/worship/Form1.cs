@@ -199,8 +199,9 @@ namespace worship
 				}
 				//슬라이드를 생성한다.
 				string[] verses = fc.GetBibleVerse(bibleVer, bible, chapter, verseA, verseB);
+				int verseCnt = verseA;
 				foreach (string verse in verses)
-					wr.makeBibleSlide(verse);
+					wr.makeBibleSlide(verse, verseCnt++);
 			}
 			//절이 왼쪽만 있는 경우
 			else if (verseA != 0 && verseB == 0)
@@ -213,7 +214,7 @@ namespace worship
 				}
 				//슬라이드를 생성한다.
 				string verse = fc.GetBibleVerse(bibleVer, bible, chapter, verseA);
-				wr.makeBibleSlide(verse);
+				wr.makeBibleSlide(verse, verseA);
 			}
 			isButton = true;
 			this.Hide();
