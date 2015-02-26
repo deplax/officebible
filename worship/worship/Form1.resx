@@ -3108,76 +3108,82 @@
   <data name="&gt;&gt;txtWorship.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="button68.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <metadata name="btnWorship.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btnWorship.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="button68.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="btnWorship.Font" type="System.Drawing.Font, System.Drawing">
     <value>NanumGothic, 9.75pt</value>
   </data>
-  <data name="button68.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnWorship.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button68.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnWorship.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 56</value>
   </data>
-  <data name="button68.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="btnWorship.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="button68.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnWorship.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 28</value>
   </data>
-  <data name="button68.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnWorship.TabIndex" type="System.Int32, mscorlib">
     <value>81</value>
   </data>
-  <data name="button68.Text" xml:space="preserve">
+  <data name="btnWorship.Text" xml:space="preserve">
     <value>찬양집</value>
   </data>
-  <data name="&gt;&gt;button68.Name" xml:space="preserve">
-    <value>button68</value>
+  <data name="&gt;&gt;btnWorship.Name" xml:space="preserve">
+    <value>btnWorship</value>
   </data>
-  <data name="&gt;&gt;button68.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnWorship.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button68.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnWorship.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button68.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnWorship.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="button67.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <metadata name="btnHymn.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btnHymn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="button67.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="btnHymn.Font" type="System.Drawing.Font, System.Drawing">
     <value>NanumGothic, 9.75pt</value>
   </data>
-  <data name="button67.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnHymn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button67.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnHymn.Location" type="System.Drawing.Point, System.Drawing">
     <value>340, 56</value>
   </data>
-  <data name="button67.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="btnHymn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="button67.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnHymn.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 28</value>
   </data>
-  <data name="button67.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnHymn.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
   </data>
-  <data name="button67.Text" xml:space="preserve">
+  <data name="btnHymn.Text" xml:space="preserve">
     <value>찬송가</value>
   </data>
-  <data name="&gt;&gt;button67.Name" xml:space="preserve">
-    <value>button67</value>
+  <data name="&gt;&gt;btnHymn.Name" xml:space="preserve">
+    <value>btnHymn</value>
   </data>
-  <data name="&gt;&gt;button67.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnHymn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button67.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnHymn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button67.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnHymn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

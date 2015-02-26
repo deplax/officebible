@@ -111,8 +111,8 @@
 			this.lblMessage = new System.Windows.Forms.Label();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.txtWorship = new System.Windows.Forms.TextBox();
-			this.button68 = new System.Windows.Forms.Button();
-			this.button67 = new System.Windows.Forms.Button();
+			this.btnWorship = new System.Windows.Forms.Button();
+			this.btnHymn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -970,33 +970,33 @@
 			this.txtWorship.TextChanged += new System.EventHandler(this.worshipSerchTxtChanged);
 			this.txtWorship.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWorship_KeyDown);
 			// 
-			// button68
+			// btnWorship
 			// 
-			this.button68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
-			this.button68.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.button68, "button68");
-			this.button68.ForeColor = System.Drawing.Color.White;
-			this.button68.Name = "button68";
-			this.button68.TabStop = false;
-			this.button68.UseVisualStyleBackColor = false;
+			this.btnWorship.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+			this.btnWorship.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.btnWorship, "btnWorship");
+			this.btnWorship.ForeColor = System.Drawing.Color.White;
+			this.btnWorship.Name = "btnWorship";
+			this.btnWorship.UseVisualStyleBackColor = false;
+			this.btnWorship.Click += new System.EventHandler(this.SelectWorship);
 			// 
-			// button67
+			// btnHymn
 			// 
-			this.button67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
-			this.button67.FlatAppearance.BorderSize = 0;
-			resources.ApplyResources(this.button67, "button67");
-			this.button67.ForeColor = System.Drawing.Color.White;
-			this.button67.Name = "button67";
-			this.button67.TabStop = false;
-			this.button67.UseVisualStyleBackColor = false;
+			this.btnHymn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+			this.btnHymn.FlatAppearance.BorderSize = 0;
+			resources.ApplyResources(this.btnHymn, "btnHymn");
+			this.btnHymn.ForeColor = System.Drawing.Color.White;
+			this.btnHymn.Name = "btnHymn";
+			this.btnHymn.UseVisualStyleBackColor = false;
+			this.btnHymn.Click += new System.EventHandler(this.SelectWorship);
 			// 
 			// BibleForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Menu;
-			this.Controls.Add(this.button67);
-			this.Controls.Add(this.button68);
+			this.Controls.Add(this.btnHymn);
+			this.Controls.Add(this.btnWorship);
 			this.Controls.Add(this.txtWorship);
 			this.Controls.Add(this.lblMessage);
 			this.Controls.Add(this.button66);
@@ -1182,7 +1182,7 @@
 		private System.Windows.Forms.Label lblMessage;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.TextBox txtWorship;
-		private System.Windows.Forms.Button button68;
-		private System.Windows.Forms.Button button67;
+		private System.Windows.Forms.Button btnWorship;
+		private System.Windows.Forms.Button btnHymn;
 	}
 }

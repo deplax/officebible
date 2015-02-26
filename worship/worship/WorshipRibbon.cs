@@ -48,20 +48,30 @@ namespace worship
 			newSlide.FollowMasterBackground = Core.MsoTriState.msoFalse;
 			newSlide.Background.Fill.ForeColor.RGB = oleColor;
 
+			//currentPT.SlideMaster.Shapes.AddPicture(@"D:\성경송출\BackgroundDB\BooksoftheBible-1440x900.jpg", Core.MsoTriState.msoFalse, Core.MsoTriState.msoTrue, 0, 0);
+
+			float slideHeight = currentPT.PageSetup.SlideHeight;
+			float slidewidth = currentPT.PageSetup.SlideWidth;
+
 			//성경 구절 다자인
 			newSlide.Shapes[1].TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
-			newSlide.Shapes[1].TextEffect.FontName = @"나눔고딕";
-			newSlide.Shapes[1].TextEffect.FontSize = 40;
+			//newSlide.Shapes[1].TextEffect.FontSize = 60;
+			newSlide.Shapes[1].TextFrame.TextRange.Font.Name = "나눔바른펜";
+			newSlide.Shapes[1].TextFrame.TextRange.Font.Size = 60;
 			newSlide.Shapes[1].TextFrame.TextRange.Text = str;
-			newSlide.Shapes[1].Top = 200;
+			newSlide.Shapes[1].Top = (slideHeight / 2) - (newSlide.Shapes[1].Height / 2);
+
 		
 		}
 
 
-		public void CopySlide(string str)
+		public void CopySlide(string str, Boolean worship)
 		{
 			string filePath = "";
-			filePath = InnerBox.ListRoot + "\\" + "찬양집" + "\\" + str;
+			if(worship)
+				filePath = InnerBox.ListRoot + "\\" + "찬양집" + "\\" + str;
+			else
+				filePath = InnerBox.ListRoot + "\\" + "새찬송가" + "\\" + str;
 
 			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
 			PowerPoint.Presentations currentPTs = CurrentApplication.Presentations;
@@ -82,7 +92,7 @@ namespace worship
 	}
 	class InnerBox
 	{
-		public static string DBroot = @"D:\성경송출\BibleDB";
-		public static string ListRoot = @"D:\성경송출";
+		public static string DBroot = FileControl.Box.DBroot;
+		public static string ListRoot = FileControl.Box.ListRoot;
 	}
 }

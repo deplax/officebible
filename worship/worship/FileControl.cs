@@ -9,8 +9,9 @@ namespace FileControl
 {
 	class Box
 	{
-		public static string DBroot = @"D:\성경송출\BibleDB";
 		public static string ListRoot = @"D:\성경송출";
+		public static string DBroot = ListRoot + @"\BibleDB";
+		
 	}
 	class FileControl
 	{
@@ -19,6 +20,7 @@ namespace FileControl
 		public static string[] worshipList = GetFileList(@"찬양집");
 		public static string[] hymnList = GetFileList(@"새찬송가");
 		public static string[] worshipOriginList = GetFileOriginList(@"찬양집");
+		public static string[] hymnOriginList = GetFileOriginList(@"새찬송가");
 
 		public string GetBibleVerse(string bibleVer, string bible, int chapter, int verse)
 		{

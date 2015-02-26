@@ -159,15 +159,14 @@ namespace Assist
 			return Box.BibleList()[topIndex].ToString();
 		}
 
-		public string[] WorshipSuggestProcess(string keyword)
+		public string[] WorshipSuggestProcess(string keyword, Boolean worship)
 		{
-			string[] worshipArr = FileControl.FileControl.worshipList;
+			string[] worshipArr;
 
-			//string[] worshipArr;
-			//if(keyword == "찬양집")
-			//	worshipArr = FileControl.FileControl.worshipList;
-			//else
-			//	worshipArr = FileControl.FileControl.hymnList;
+			if(worship)
+				worshipArr = FileControl.FileControl.worshipList;
+			else
+				worshipArr = FileControl.FileControl.hymnList;
 
 			KorToPhoneme ktp = new KorToPhoneme();
 

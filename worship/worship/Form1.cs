@@ -22,6 +22,7 @@ namespace worship
 
 		Boolean isClick = false;
 		Boolean isWorship = true;
+		Boolean isButton = true;
 
 		protected override bool IsInputKey(Keys keyData)
 		{
@@ -72,7 +73,7 @@ namespace worship
 				smartSuggest[i].FlatStyle = FlatStyle.Flat;
 				smartSuggest[i].Visible = true;
 				smartSuggest[i].Tag = i;
-				smartSuggest[i].TabStop = false;
+				smartSuggest[i].TabStop = true;
 
 				resources.ApplyResources(this.smartSuggest[i], "smartSuggest" + i);
 				resources.ApplyResources(this, "$this");
@@ -87,7 +88,7 @@ namespace worship
 
 		private void SelectButton(object sender, EventArgs e)
 		{
-			Button btn = (Button) sender;
+			Button btn = (Button)sender;
 			btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
 		}
 		private void DiselectButton(object sender, EventArgs e)
@@ -122,7 +123,7 @@ namespace worship
 				cmbBibleVer.Items.Add(verList[i]);
 			}
 			cmbBibleVer.SelectedIndex = 0;
-		}		
+		}
 
 		private void btnMakeBible_Click(object sender, EventArgs e)
 		{
@@ -133,10 +134,15 @@ namespace worship
 
 			isClick = true;
 
-
 			string bibleVer = cmbBibleVer.Text;
 			string bible = txtBible.Text;
 
+			if (!isButton)
+			{
+				TextBox btn = (TextBox)sender;
+				if (btn.Name == "txtChapter" || btn.Name == "txtVerseA" || btn.Name == "txtVerseB")
+					SetNumber(sender, e);
+			}
 			if (!int.TryParse(txtVerseA.Text, out verseA))
 				verseA = 0;
 			if (!int.TryParse(txtVerseB.Text, out verseB))
@@ -209,13 +215,16 @@ namespace worship
 				string verse = fc.GetBibleVerse(bibleVer, bible, chapter, verseA);
 				wr.makeBibleSlide(verse);
 			}
+			isButton = true;
 			this.Hide();
 		}
 
 		private void CheckBibleEnter(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
+			
 			if (e.KeyChar == (char)Keys.Enter)
 			{
+				isButton = false;
 				btnMakeBible_Click(sender, e);
 			}
 		}
@@ -321,7 +330,7 @@ namespace worship
 		private void worshipSerchTxtChanged(object sender, EventArgs e)
 		{
 			string KeyPhoneme = ktp.Trans(etk.Trans(txtWorship.Text));
-			string[] ranking = bac.WorshipSuggestProcess(KeyPhoneme);
+			string[] ranking = bac.WorshipSuggestProcess(KeyPhoneme, isWorship);
 			for (var i = 0; i < smartSuggest.Length; i++)
 				smartSuggest[i].Text = ranking[i];
 		}
@@ -337,8 +346,16 @@ namespace worship
 
 			worship.WorshipRibbon wr = new worship.WorshipRibbon();
 
-			int idx = Array.IndexOf(FileControl.FileControl.worshipList, btnWorship.Text);
-			wr.CopySlide(FileControl.FileControl.worshipOriginList[idx]);
+			if (isWorship)
+			{
+				int idx = Array.IndexOf(FileControl.FileControl.worshipList, btnWorship.Text);
+				wr.CopySlide(FileControl.FileControl.worshipOriginList[idx], isWorship);
+			}
+			else
+			{
+				int idx = Array.IndexOf(FileControl.FileControl.hymnList, btnWorship.Text);
+				wr.CopySlide(FileControl.FileControl.hymnOriginList[idx], isWorship);
+			}
 		}
 
 		private void BibleForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -349,12 +366,25 @@ namespace worship
 
 		private void txtWorship_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Enter)
+			if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Down || e.KeyCode == Keys.Tab)
 				this.ActiveControl = smartSuggest[0];
-			if (e.KeyCode == Keys.Down)
+		}
+
+		private void SelectWorship(object sender, EventArgs e)
+		{
+			Button btn = (Button)sender;
+			if (btn.Text == "찬양집")
 			{
-				this.ActiveControl = smartSuggest[0];
+				isWorship = true;
+				btnHymn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
 			}
+			else
+			{
+				isWorship = false;
+				btnWorship.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(186)))), ((int)(((byte)(186)))));
+			}
+			btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+			this.ActiveControl = txtWorship;
 		}
 
 
@@ -362,7 +392,7 @@ namespace worship
 	}
 	class KeyButton : Button
 	{
- 		protected override bool IsInputKey(Keys keyData)
+		protected override bool IsInputKey(Keys keyData)
 		{
 			switch (keyData)
 			{
