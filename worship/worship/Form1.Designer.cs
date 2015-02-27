@@ -113,6 +113,7 @@
 			this.txtWorship = new System.Windows.Forms.TextBox();
 			this.btnWorship = new System.Windows.Forms.Button();
 			this.btnHymn = new System.Windows.Forms.Button();
+			this.button68 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -990,11 +991,19 @@
 			this.btnHymn.UseVisualStyleBackColor = false;
 			this.btnHymn.Click += new System.EventHandler(this.SelectWorship);
 			// 
+			// button68
+			// 
+			resources.ApplyResources(this.button68, "button68");
+			this.button68.Name = "button68";
+			this.button68.UseVisualStyleBackColor = true;
+			this.button68.Click += new System.EventHandler(this.button68_Click);
+			// 
 			// BibleForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Menu;
+			this.Controls.Add(this.button68);
 			this.Controls.Add(this.btnHymn);
 			this.Controls.Add(this.btnWorship);
 			this.Controls.Add(this.txtWorship);
@@ -1184,5 +1193,6 @@
 		private System.Windows.Forms.TextBox txtWorship;
 		private System.Windows.Forms.Button btnWorship;
 		private System.Windows.Forms.Button btnHymn;
+		private System.Windows.Forms.Button button68;
 	}
 }

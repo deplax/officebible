@@ -14,6 +14,7 @@ namespace worship
 	public partial class BibleForm : Form
 	{
 		FileControl.FileControl fc = new FileControl.FileControl();
+		SlideControl sc = new SlideControl();
 		Assist.KorToPhoneme ktp = new Assist.KorToPhoneme();
 		Assist.BibleAutoComplete bac = new Assist.BibleAutoComplete();
 		Assist.EngToKor etk = new Assist.EngToKor();
@@ -201,7 +202,7 @@ namespace worship
 				string[] verses = fc.GetBibleVerse(bibleVer, bible, chapter, verseA, verseB);
 				int verseCnt = verseA;
 				foreach (string verse in verses)
-					wr.makeBibleSlide(verse, verseCnt++);
+					sc.makeBibleSlide(verse, verseCnt++);
 			}
 			//절이 왼쪽만 있는 경우
 			else if (verseA != 0 && verseB == 0)
@@ -214,7 +215,7 @@ namespace worship
 				}
 				//슬라이드를 생성한다.
 				string verse = fc.GetBibleVerse(bibleVer, bible, chapter, verseA);
-				wr.makeBibleSlide(verse, verseA);
+				sc.makeBibleSlide(verse, verseA);
 			}
 			isButton = true;
 			this.Hide();
@@ -350,12 +351,12 @@ namespace worship
 			if (isWorship)
 			{
 				int idx = Array.IndexOf(FileControl.FileControl.worshipList, btnWorship.Text);
-				wr.CopySlide(FileControl.FileControl.worshipOriginList[idx], isWorship);
+				sc.CopySlide(FileControl.FileControl.worshipOriginList[idx], isWorship);
 			}
 			else
 			{
 				int idx = Array.IndexOf(FileControl.FileControl.hymnList, btnWorship.Text);
-				wr.CopySlide(FileControl.FileControl.hymnOriginList[idx], isWorship);
+				sc.CopySlide(FileControl.FileControl.hymnOriginList[idx], isWorship);
 			}
 		}
 
@@ -386,6 +387,12 @@ namespace worship
 			}
 			btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
 			this.ActiveControl = txtWorship;
+		}
+
+		private void button68_Click(object sender, EventArgs e)
+		{
+			worship.WorshipRibbon wr = new worship.WorshipRibbon();
+			sc.dodo();
 		}
 
 
