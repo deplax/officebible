@@ -28,7 +28,7 @@ namespace worship
 			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
 			PowerPoint.CustomLayout customLayout = currentPT.SlideMaster.CustomLayouts[PowerPoint.PpSlideLayout.ppLayoutTitleOnly];
 			int fontSize = 50;
-			string fontName = "Adobe 고딕 Std B";
+			//string fontName = "Adobe 고딕 Std B";
 
 			//PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), currentPT.SlideMaster.CustomLayouts._Index(6));
 			//Color myBackgroundColor = Color.Beige;
@@ -48,7 +48,7 @@ namespace worship
 				wallpaper = true;
 
 				bibleLayout.Shapes.Title.TextFrame.DeleteText();
-				bibleLayout.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
+				//bibleLayout.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
 				
 			}
 
@@ -63,30 +63,33 @@ namespace worship
 			newSlide.Shapes.Title.TextFrame.TextRange.Text = str;
 			newSlide.Shapes.Title.Width = newSlide.Shapes.Title.Width - 50;
 			newSlide.Shapes.Title.Left = newSlide.Shapes.Title.Left + 50;
+			newSlide.Shapes.Title.TextFrame.VerticalAnchor = Core.MsoVerticalAnchor.msoAnchorTop;
+			//newSlide.Shapes.Title.TextFrame.TextRange.ParagraphFormat.
+			
 
-			//newSlide.Shapes.Title.TextFrame.TextRange.Text = verse + " " + str;
-			newSlide.Shapes.Title.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
-			newSlide.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
+			newSlide.Shapes.Title.TextFrame.TextRange.Text = verse + " " + str;
+			//newSlide.Shapes.Title.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
+			//newSlide.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
 			newSlide.Shapes.Title.Top = (slideHeight / 2) - (newSlide.Shapes[1].Height / 2);
 
 			//절 디자인
-			PowerPoint.Shape verseText = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 100, 100);
-			verseText.TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentRight;
-			verseText.TextFrame.TextRange.Text = verse + "";
-			verseText.TextFrame.TextRange.Font.Size = fontSize;
-			verseText.TextFrame.TextRange.Font.Name = fontName;
-			verseText.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
-			float verseTop = newSlide.Shapes.Title.Top;
-			float verseLeft = newSlide.Shapes.Title.Left - verseText.Width - 10;
-			verseText.Left = verseLeft;
-			verseText.Top = verseTop;
+			//PowerPoint.Shape verseText = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 100, 100);
+			//verseText.TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentRight;
+			//verseText.TextFrame.TextRange.Text = verse + "";
+			//verseText.TextFrame.TextRange.Font.Size = fontSize;
+			////verseText.TextFrame.TextRange.Font.Name = fontName;
+			//verseText.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
+			//float verseTop = newSlide.Shapes.Title.Top;
+			//float verseLeft = newSlide.Shapes.Title.Left - verseText.Width - 10;
+			//verseText.Left = verseLeft;
+			//verseText.Top = verseTop;
 
 			//성경, 장 디자인
 			PowerPoint.Shape chapterText = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 250, 100);
 			chapterText.TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
 			chapterText.TextFrame.TextRange.Text = bible + " " + chapter + "장";
 			chapterText.TextFrame.TextRange.Font.Size = 25;
-			chapterText.TextFrame.TextRange.Font.Name = fontName;
+			//chapterText.TextFrame.TextRange.Font.Name = fontName;
 			chapterText.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
 			float chapterTop = 20;
 			float chapterLeft = slidewidth - chapterText.Width - 20;
