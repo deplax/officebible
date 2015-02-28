@@ -44,6 +44,8 @@
 			this.editBox4 = this.Factory.CreateRibbonEditBox();
 			this.button1 = this.Factory.CreateRibbonButton();
 			this.group2 = this.Factory.CreateRibbonGroup();
+			this.button2 = this.Factory.CreateRibbonButton();
+			this.button3 = this.Factory.CreateRibbonButton();
 			this.tab1.SuspendLayout();
 			this.group1.SuspendLayout();
 			this.box1.SuspendLayout();
@@ -61,6 +63,8 @@
 			// 
 			this.group1.Items.Add(this.box1);
 			this.group1.Items.Add(this.button1);
+			this.group1.Items.Add(this.button2);
+			this.group1.Items.Add(this.button3);
 			this.group1.Label = "Bible";
 			this.group1.Name = "group1";
 			// 
@@ -120,6 +124,17 @@
 			this.group2.Label = "group2";
 			this.group2.Name = "group2";
 			// 
+			// button2
+			// 
+			this.button2.Label = "button2";
+			this.button2.Name = "button2";
+			this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+			// 
+			// button3
+			// 
+			this.button3.Label = "button3";
+			this.button3.Name = "button3";
+			// 
 			// WorshipRibbon
 			// 
 			this.Name = "WorshipRibbon";
@@ -150,6 +165,8 @@
 		internal Microsoft.Office.Tools.Ribbon.RibbonBox box2;
 		internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+		internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
+		internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
 	}
 
 	partial class ThisRibbonCollection

@@ -32,6 +32,18 @@ namespace worship
 		{
 			bf.Close();
 		}
+
+		private void button2_Click(object sender, RibbonControlEventArgs e)
+		{
+			SlideControl sc = new SlideControl();
+			sc.dodo();
+		}
+
+		private void button3_Click(object sender, RibbonControlEventArgs e)
+		{
+			SlideControl sc = new SlideControl();
+			sc.kuku();
+		}
 	}
 
 }

@@ -202,7 +202,7 @@ namespace worship
 				string[] verses = fc.GetBibleVerse(bibleVer, bible, chapter, verseA, verseB);
 				int verseCnt = verseA;
 				foreach (string verse in verses)
-					sc.makeBibleSlide(verse, verseCnt++);
+					sc.makeBibleSlide(verse, verseCnt++, chapter, bible);
 			}
 			//절이 왼쪽만 있는 경우
 			else if (verseA != 0 && verseB == 0)
@@ -215,7 +215,7 @@ namespace worship
 				}
 				//슬라이드를 생성한다.
 				string verse = fc.GetBibleVerse(bibleVer, bible, chapter, verseA);
-				sc.makeBibleSlide(verse, verseA);
+				sc.makeBibleSlide(verse, verseA, chapter, bible);
 			}
 			isButton = true;
 			this.Hide();
@@ -388,15 +388,6 @@ namespace worship
 			btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
 			this.ActiveControl = txtWorship;
 		}
-
-		private void button68_Click(object sender, EventArgs e)
-		{
-			worship.WorshipRibbon wr = new worship.WorshipRibbon();
-			sc.dodo();
-		}
-
-
-
 	}
 	class KeyButton : Button
 	{

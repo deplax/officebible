@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Core = Microsoft.Office.Core;
@@ -19,13 +20,17 @@ namespace worship
 	}
 	class SlideControl
 	{
-		public void makeBibleSlide(string str, int verse)
+		Boolean wallpaper = false;
+		Boolean BlackWhite = false;
+		public void makeBibleSlide(string str, int verse, int chapter, string bible)
 		{
 			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
 			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
 			PowerPoint.CustomLayout customLayout = currentPT.SlideMaster.CustomLayouts[PowerPoint.PpSlideLayout.ppLayoutTitleOnly];
-			//PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), currentPT.SlideMaster.CustomLayouts._Index(6));
+			int fontSize = 50;
+			string fontName = "Adobe 고딕 Std B";
 
+			//PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), currentPT.SlideMaster.CustomLayouts._Index(6));
 			//Color myBackgroundColor = Color.Beige;
 			//int oleColor = ColorTranslator.ToOle(myBackgroundColor);
 			//newSlide.FollowMasterBackground = Core.MsoTriState.msoFalse;
@@ -36,43 +41,59 @@ namespace worship
 			float slideHeight = currentPT.PageSetup.SlideHeight;
 			float slidewidth = currentPT.PageSetup.SlideWidth;
 			PowerPoint.CustomLayout bibleLayout = currentPT.SlideMaster.CustomLayouts._Index(6);
-			bibleLayout.Shapes.AddPicture(@"D:\성경송출\BackgroundDB\wallpaper.png", Core.MsoTriState.msoFalse, Core.MsoTriState.msoTrue, 0, 0, slidewidth, slideHeight);
+			if (!wallpaper)
+			{
+				bibleLayout.Shapes.AddPicture(@"D:\성경송출\BackgroundDB\wallpaper.png", Core.MsoTriState.msoFalse, Core.MsoTriState.msoTrue, 0, 0, slidewidth, slideHeight);
+				bibleLayout.Shapes.Title.ZOrder(Core.MsoZOrderCmd.msoBringToFront);
+				wallpaper = true;
+
+				bibleLayout.Shapes.Title.TextFrame.DeleteText();
+				bibleLayout.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
+				
+			}
+
 			PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), bibleLayout);
 
-			currentPT.SlideMaster.CustomLayouts.Add(currentPT.SlideMaster.CustomLayouts.Count + 1);
-			//PowerPoint.CustomLayout customLayout2 = currentPT.SlideMaster.CustomLayouts._Index(currentPT.SlideMaster.CustomLayouts.Count + 1);
-			//customLayout2.Shapes[1].TextFrame.TextRange.Text = "영어english";
-			//customLayout2.Shapes[1].TextFrame.TextRange.Font.Name = "Adobe 고딕 Std B";
-
-
+			
 
 			//성경 구절 다자인
-			newSlide.Shapes[1].TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
-			newSlide.Shapes[1].TextFrame.TextRange.Font.Size = 60;
-			newSlide.Shapes[1].TextFrame.TextRange.Text = verse + " " + str;
-			newSlide.Shapes[1].TextFrame.TextRange.Font.Name = "Adobe 고딕 Std B";
-			newSlide.Shapes[1].Top = (slideHeight / 2) - (newSlide.Shapes[1].Height / 2);
+			newSlide.Shapes.Title.TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentLeft;
+			newSlide.Shapes.Title.TextFrame.TextRange.Font.Size = fontSize;
 
-			//PowerPoint.Shape textBox = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 10, 10, 200, 200);
-			//textBox.TextFrame.TextRange.Text = "english한글";
-			//textBox.TextFrame.TextRange.Font.Size = 20;
-			//textBox.TextFrame.TextRange.Font.Name = "Adobe 고딕 Std B";
+			newSlide.Shapes.Title.TextFrame.TextRange.Text = str;
+			newSlide.Shapes.Title.Width = newSlide.Shapes.Title.Width - 50;
+			newSlide.Shapes.Title.Left = newSlide.Shapes.Title.Left + 50;
 
-			//newSlide.Shapes[1].TextEffect.FontName = "Adobe 고딕 Std B";
-			//newSlide.Shapes[1].TextFrame.DeleteText();
-			//newSlide.Shapes[1].TextFrame.TextRange.InsertAfter("english.한글");
-			//newSlide.Shapes[1].TextFrame.TextRange.Font.Name = "Adobe 고딕 Std B";
+			//newSlide.Shapes.Title.TextFrame.TextRange.Text = verse + " " + str;
+			newSlide.Shapes.Title.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
+			newSlide.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
+			newSlide.Shapes.Title.Top = (slideHeight / 2) - (newSlide.Shapes[1].Height / 2);
 
+			//절 디자인
+			PowerPoint.Shape verseText = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 100, 100);
+			verseText.TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentRight;
+			verseText.TextFrame.TextRange.Text = verse + "";
+			verseText.TextFrame.TextRange.Font.Size = fontSize;
+			verseText.TextFrame.TextRange.Font.Name = fontName;
+			verseText.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
+			float verseTop = newSlide.Shapes.Title.Top;
+			float verseLeft = newSlide.Shapes.Title.Left - verseText.Width - 10;
+			verseText.Left = verseLeft;
+			verseText.Top = verseTop;
 
+			//성경, 장 디자인
+			PowerPoint.Shape chapterText = newSlide.Shapes.AddTextbox(Core.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 250, 100);
+			chapterText.TextEffect.Alignment = Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
+			chapterText.TextFrame.TextRange.Text = bible + " " + chapter + "장";
+			chapterText.TextFrame.TextRange.Font.Size = 25;
+			chapterText.TextFrame.TextRange.Font.Name = fontName;
+			chapterText.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
+			float chapterTop = 20;
+			float chapterLeft = slidewidth - chapterText.Width - 20;
+			chapterText.Left = chapterLeft;
+			chapterText.Top = chapterTop;
 		}
 
-		public void dodo()
-		{
-			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
-			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
-			currentPT.Slides[2].Shapes[1].TextFrame.TextRange.InsertAfter("한글을 추가했다.");
-			currentPT.Slides[2].Shapes[1].TextFrame.TextRange.Font.Name = "나눔고딕";
-		}
 
 		public void CopySlide(string str, Boolean worship)
 		{
@@ -92,6 +113,33 @@ namespace worship
 				copyPT.Slides[i].Copy();
 				currentPT.Slides.Paste(currentPT.Slides.Count + 1).Design = copyPT.Slides[i].Design;
 			}
+		}
+
+
+		public void dodo()
+		{
+			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
+			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
+			PowerPoint.CustomLayout custom = currentPT.Slides[1].CustomLayout;
+			PowerPoint.Slide newSlide = currentPT.Slides.AddSlide(1, custom);
+			newSlide.Shapes.Title.Title = "타이틀";
+			newSlide.Shapes.Title.TextFrame.AutoSize = PowerPoint.PpAutoSize.ppAutoSizeShapeToFitText;
+			newSlide.Shapes.Title.TextFrame.TextRange.Text = "TITLETEXT";
+			float t = newSlide.Shapes.Title.Top;
+			newSlide.Shapes.Title.TextEffect.Text = @"한글이로세";
+			newSlide.Shapes.Title.TextEffect.FontName = @"나눔고딕";
+			newSlide.Shapes.Title.TextFrame.TextRange.Font.Name = @"나눔고딕";
+			newSlide.Shapes.Title.TextFrame.TextRange.Font.Size = 100;
+		}
+
+		public void kuku()
+		{
+			PowerPoint.Application CurrentApplication = Globals.ThisAddIn.Application;
+			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
+			PowerPoint.CustomLayout custom = currentPT.Slides[1].CustomLayout;
+			float width = currentPT.Slides[1].Shapes[1].Width;
+			float height = currentPT.Slides[1].Shapes[1].Height;
+			MessageBox.Show("width : " + width + " | height : " + height);
 		}
 	}
 }
