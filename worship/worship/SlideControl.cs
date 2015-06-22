@@ -28,7 +28,7 @@ namespace worship
 			PowerPoint.Presentation currentPT = CurrentApplication.ActivePresentation;
 			PowerPoint.CustomLayout customLayout = currentPT.SlideMaster.CustomLayouts[PowerPoint.PpSlideLayout.ppLayoutTitleOnly];
 			int fontSize = 50;
-			//string fontName = "Adobe 고딕 Std B";
+			string fontName = "Adobe 고딕 Std B";
 
 			//PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), currentPT.SlideMaster.CustomLayouts._Index(6));
 			//Color myBackgroundColor = Color.Beige;
@@ -48,7 +48,8 @@ namespace worship
 				wallpaper = true;
 
 				bibleLayout.Shapes.Title.TextFrame.DeleteText();
-				//bibleLayout.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
+				bibleLayout.Shapes.Title.TextFrame.TextRange.Font.NameFarEast = fontName;
+				bibleLayout.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
 				
 			}
 
