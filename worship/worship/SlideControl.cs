@@ -43,14 +43,13 @@ namespace worship
 			PowerPoint.CustomLayout bibleLayout = currentPT.SlideMaster.CustomLayouts._Index(6);
 			if (!wallpaper)
 			{
-				bibleLayout.Shapes.AddPicture(@"D:\성경송출\BackgroundDB\wallpaper.png", Core.MsoTriState.msoFalse, Core.MsoTriState.msoTrue, 0, 0, slidewidth, slideHeight);
+				bibleLayout.Shapes.AddPicture(@"D:\성경송출\BackgroundDB\wallpaper.jpg", Core.MsoTriState.msoFalse, Core.MsoTriState.msoTrue, 0, 0, slidewidth, slideHeight);
 				bibleLayout.Shapes.Title.ZOrder(Core.MsoZOrderCmd.msoBringToFront);
 				wallpaper = true;
 
 				bibleLayout.Shapes.Title.TextFrame.DeleteText();
 				bibleLayout.Shapes.Title.TextFrame.TextRange.Font.NameFarEast = fontName;
 				bibleLayout.Shapes.Title.TextFrame.TextRange.Font.Name = fontName;
-				
 			}
 
 			PowerPoint.Slide newSlide = currentPT.Slides.AddSlide((currentPT.Slides.Count + 1), bibleLayout);
@@ -116,6 +115,8 @@ namespace worship
 			{
 				copyPT.Slides[i].Copy();
 				currentPT.Slides.Paste(currentPT.Slides.Count + 1).Design = copyPT.Slides[i].Design;
+				currentPT.Slides[currentPT.Slides.Count].Shapes.Title.TextFrame.TextRange.Font.NameFarEast = "나눔고딕";
+				currentPT.Slides[currentPT.Slides.Count].Shapes[1].TextFrame.TextRange.Font.NameFarEast = "나눔고딕";
 			}
 		}
 
