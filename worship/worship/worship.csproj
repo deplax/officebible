@@ -104,6 +104,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -136,7 +137,20 @@
     <Reference Include="Accessibility" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\sqliteTest\sqliteTest\System.Data.SQLite.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\..\..\sqliteTest\sqliteTest\System.Data.SQLite.Linq.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms" />
@@ -181,9 +195,11 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Assist.cs" />
-    <Compile Include="SlideControl.cs" />
-    <Compile Include="FileControl.cs" />
+    <Compile Include="Database\Bible.cs" />
+    <Compile Include="Sources\Assist.cs" />
+    <Compile Include="Database\BibleDao.cs" />
+    <Compile Include="Sources\SlideControl.cs" />
+    <Compile Include="Sources\FileControl.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +212,7 @@
     <Compile Include="Ribbon.cs">
       <XmlRibbon>true</XmlRibbon>
     </Compile>
+    <Compile Include="Util\ControlBox.cs" />
     <Compile Include="WorshipRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -242,7 +259,7 @@
     <EmbeddedResource Include="Ribbon.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1272326_907941155892449_5688073796157782350_o.jpg" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

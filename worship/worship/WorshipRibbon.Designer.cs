@@ -43,13 +43,15 @@
 			this.editBox3 = this.Factory.CreateRibbonEditBox();
 			this.editBox4 = this.Factory.CreateRibbonEditBox();
 			this.button1 = this.Factory.CreateRibbonButton();
-			this.group2 = this.Factory.CreateRibbonGroup();
 			this.button2 = this.Factory.CreateRibbonButton();
 			this.button3 = this.Factory.CreateRibbonButton();
+			this.group2 = this.Factory.CreateRibbonGroup();
+			this.gallery1 = this.Factory.CreateRibbonGallery();
 			this.tab1.SuspendLayout();
 			this.group1.SuspendLayout();
 			this.box1.SuspendLayout();
 			this.box2.SuspendLayout();
+			this.group2.SuspendLayout();
 			// 
 			// tab1
 			// 
@@ -119,11 +121,6 @@
 			this.button1.ShowImage = true;
 			this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
 			// 
-			// group2
-			// 
-			this.group2.Label = "group2";
-			this.group2.Name = "group2";
-			// 
 			// button2
 			// 
 			this.button2.Label = "button2";
@@ -134,6 +131,20 @@
 			// 
 			this.button3.Label = "button3";
 			this.button3.Name = "button3";
+			// 
+			// group2
+			// 
+			this.group2.Items.Add(this.gallery1);
+			this.group2.Label = "group2";
+			this.group2.Name = "group2";
+			// 
+			// gallery1
+			// 
+			this.gallery1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+			this.gallery1.Label = "gallery1";
+			this.gallery1.Name = "gallery1";
+			this.gallery1.ShowImage = true;
+			this.gallery1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gallery1_Click);
 			// 
 			// WorshipRibbon
 			// 
@@ -150,6 +161,8 @@
 			this.box1.PerformLayout();
 			this.box2.ResumeLayout(false);
 			this.box2.PerformLayout();
+			this.group2.ResumeLayout(false);
+			this.group2.PerformLayout();
 
 		}
 
@@ -167,6 +180,7 @@
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
+		internal Microsoft.Office.Tools.Ribbon.RibbonGallery gallery1;
 	}
 
 	partial class ThisRibbonCollection

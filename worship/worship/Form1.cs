@@ -8,11 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+
+using System.Reflection;
+using worship.Database;
 using Box = Assist.Box;
+
 namespace worship
 {
 	public partial class BibleForm : Form
 	{
+		BibleDao bibleDao = new BibleDao();
+		Dictionary<String, String> bibleVerMap;
+
 		FileControl.FileControl fc = new FileControl.FileControl();
 		SlideControl sc = new SlideControl();
 		Assist.KorToPhoneme ktp = new Assist.KorToPhoneme();
@@ -114,29 +121,29 @@ namespace worship
 		{
 			if (e.KeyCode == Keys.Escape)
 				this.Hide();
-		}
+		} 
 
+		//cmbBibleVer를 세팅한다.
 		private void SetBibleVer()
 		{
-			string[] verList = fc.SetBibleVer();
-			for (var i = 0; i < verList.Length; i++)
-			{
-				cmbBibleVer.Items.Add(verList[i]);
-			}
+			bibleVerMap = bibleDao.GetBibleVer();
+			foreach (KeyValuePair<String, String> kvp in bibleVerMap)
+				cmbBibleVer.Items.Add(kvp.Key);
 			cmbBibleVer.SelectedIndex = 0;
 		}
 
+		//만들기 버튼을 클릭시 슬라이드를 생성한다.
 		private void btnMakeBible_Click(object sender, EventArgs e)
 		{
-			worship.WorshipRibbon wr = new worship.WorshipRibbon();
+			//worship.WorshipRibbon wr = new worship.WorshipRibbon();
+
+			string bibleVer = bibleVerMap[cmbBibleVer.Text];
+			string bible = txtBible.Text;
 			int chapter;
-			int verseB;
 			int verseA;
+			int verseB;
 
 			isClick = true;
-
-			string bibleVer = cmbBibleVer.Text;
-			string bible = txtBible.Text;
 
 			if (!isButton)
 			{
@@ -149,6 +156,14 @@ namespace worship
 			if (!int.TryParse(txtVerseB.Text, out verseB))
 				verseB = 0;
 
+			//성경이 입력되지 않았을 경우
+			if (bible == "")
+			{
+				lblMessage.Text = "[주의] 성경이 입력되지 않았습니다.";
+				this.ActiveControl = txtBible;
+				return;
+			}
+
 			//장이 입력되지 않았을 경우
 			if (!int.TryParse(txtChapter.Text, out chapter))
 			{
@@ -159,21 +174,16 @@ namespace worship
 			//절만 입력되지 않은 경우
 			if (verseA == 0 && verseB == 0)
 			{
+				Bible tempBible = new Bible(bibleVer, bible, chapter);
 				verseA = 1;
-				verseB = GetVerseIdx(chapter);
+				string path2 = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+				verseB = bibleDao.GetVerseCount(tempBible);
 			}
 
 			//오른쪽에만 입력하였을 경우 1 ~ 입력까지 출력.
 			if (verseA == 0 && verseB != 0)
 				verseA = 1;
-
-			//성경이 입력되지 않았을 경우
-			if (bible == "")
-			{
-				lblMessage.Text = "[주의] 성경이 입력되지 않았습니다.";
-				this.ActiveControl = txtBible;
-				return;
-			}
+			
 			//장의 범위가 넘어가는 경우
 			else if (GetChapterIdx() < chapter)
 			{
