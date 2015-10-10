@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Collections;
 using worship.Util;
+using System.Reflection;
 
 namespace worship.Database
 {
 	class BibleDao
 	{
 		string strConn = @"Data Source=" + ControlBox.ProgramRoot + ControlBox.DatabaseDirectory + "\\" + ControlBox.DatabaseName;
+		//string strConn = @"Data Source=" + "C:\\Users\\Administrator\\Documents\\Visual Studio 2013\\Projects\\officebible\\worship\\worship\\bin\\Debug\\" + ControlBox.DatabaseDirectory + "\\" + ControlBox.DatabaseName;
 
 		//성경의 종류를 Map으로 리턴 (하드코딩)
 		public Dictionary<String, String> GetBibleVer()

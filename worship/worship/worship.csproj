@@ -129,6 +129,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -138,14 +139,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\..\sqliteTest\sqliteTest\System.Data.SQLite.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\..\..\sqliteTest\sqliteTest\System.Data.SQLite.Linq.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.DirectoryServices">
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -213,6 +208,7 @@
       <XmlRibbon>true</XmlRibbon>
     </Compile>
     <Compile Include="Util\ControlBox.cs" />
+    <Compile Include="Util\EmbeddedAssembly.cs" />
     <Compile Include="WorshipRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -260,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="System.Data.SQLite.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
