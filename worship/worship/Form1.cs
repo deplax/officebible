@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Reflection;
 using worship.Database;
 using Box = Assist.Box;
+using worship.Util;
 
 namespace worship
 {
@@ -107,6 +108,9 @@ namespace worship
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			//string resource = "worship.System.Data.SQLite.dll";
+			//EmbeddedAssembly.Load(resource, "System.Data.SQLite.dll");
+			//AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
 			SetBibleVer();
 			this.txtChapter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckBibleEnter);
@@ -115,6 +119,11 @@ namespace worship
 
 			this.KeyPreview = true;
 			this.KeyDown += new KeyEventHandler(DetectESC);
+		}
+
+		static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+		{
+			return EmbeddedAssembly.Get(args.Name);
 		}
 
 		private void DetectESC(object sender, KeyEventArgs e)

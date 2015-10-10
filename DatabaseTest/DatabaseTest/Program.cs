@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Collections;
 using System.Reflection;
+using System.IO;
 
 
 namespace DatabaseTest
@@ -15,9 +16,10 @@ namespace DatabaseTest
 	{
 		static void Main(string[] args)
 		{
-			string path = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+			string resource = "DatabaseTest.System.Data.SQLite.dll";
+			EmbeddedAssembly.Load(resource, "System.Data.SQLite.dll");
 			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve2);
+
 			BibleDao bd = new BibleDao();
 			Bible a = new Bible("GYGJ", "창세기", 1, 1);
 			Bible b = new Bible("GYGJ", "창세기", 1, 10);
@@ -27,24 +29,11 @@ namespace DatabaseTest
 
 		static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
 		{
-			using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DatabaseTest.System.Data.SQLite.dll"))
-			{
-				byte[] assemblyData = new byte[stream.Length];
-				stream.Read(assemblyData, 0, assemblyData.Length);
-				return Assembly.Load(assemblyData);
-			}
-		}
-
-		static Assembly CurrentDomain_AssemblyResolve2(object sender, ResolveEventArgs args)
-		{
-			using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DatabaseTest.System.Data.SQLite.Linq.dll"))
-			{
-				byte[] assemblyData = new byte[stream.Length];
-				stream.Read(assemblyData, 0, assemblyData.Length);
-				return Assembly.Load(assemblyData);
-			}
+			return EmbeddedAssembly.Get(args.Name);
 		}
 	}
+
+
 	class BibleDao
 	{
 		string strConn = @"Data Source=" + ControlBox.ProgramRoot + ControlBox.DatabaseDirectory + "\\" + ControlBox.DatabaseName;

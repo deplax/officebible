@@ -140,12 +140,13 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\..\..\sqliteTest\sqliteTest\System.Data.SQLite.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\..\..\sqliteTest\sqliteTest\System.Data.SQLite.Linq.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.DirectoryServices">
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -213,9 +214,10 @@
       <XmlRibbon>true</XmlRibbon>
     </Compile>
     <Compile Include="Util\ControlBox.cs" />
-    <Compile Include="WorshipRibbon.cs">
+    <Compile Include="Util\EmbeddedAssembly.cs" />
+    <EmbeddedResource Include="WorshipRibbon.cs">
       <SubType>Component</SubType>
-    </Compile>
+    </EmbeddedResource>
     <Compile Include="WorshipRibbon.Designer.cs">
       <DependentUpon>WorshipRibbon.cs</DependentUpon>
     </Compile>
@@ -260,6 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="System.Data.SQLite.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
